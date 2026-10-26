@@ -4,32 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Website Desa Sedati Agung')</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; background: #f5f7fa; color: #1f2937; }
-        a { color: #0f766e; text-decoration: none; }
-        nav { background: #0f172a; color: white; padding: 16px 32px; }
-        nav ul { list-style: none; display: flex; gap: 18px; margin: 0; padding: 0; flex-wrap: wrap; }
-        nav a { color: #e2e8f0; }
-        main { max-width: 1100px; margin: 32px auto; padding: 0 20px; }
-        .card { background: white; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08); }
-        h1, h2 { margin-top: 0; }
-    </style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="{{ url('/') }}">Beranda</a></li>
-            <li><a href="{{ url('/profil-desa') }}">Profil Desa</a></li>
-            <li><a href="{{ url('/profil-bumdes') }}">Profil BUMDES</a></li>
-            <li><a href="{{ url('/berita') }}">Berita</a></li>
-            <li><a href="{{ url('/agenda') }}">Agenda</a></li>
-            <li><a href="{{ url('/kontak') }}">Kontak</a></li>
-            <li><a href="{{ url('/admin') }}">Admin</a></li>
-        </ul>
-    </nav>
+    <header class="site-header">
+        <a class="site-brand" href="{{ route('home') }}" aria-label="Desa Sedati Agung, beranda">
+            <span class="site-brand__mark" aria-hidden="true">SA</span>
+            <span class="site-brand__text">
+                <strong>Desa Sedati Agung</strong>
+                <small>Kabupaten Sidoarjo</small>
+            </span>
+        </a>
 
-    <main>
+        <nav class="site-nav" aria-label="Navigasi utama">
+            <a @class(['is-active' => request()->routeIs('home')]) href="{{ route('home') }}">Beranda</a>
+            <a @class(['is-active' => request()->routeIs('profil-desa')]) href="{{ route('profil-desa') }}">Profil Desa</a>
+            <a @class(['is-active' => request()->routeIs('profil-bumdes')]) href="{{ route('profil-bumdes') }}">Profil BUMDES</a>
+            <a @class(['is-active' => request()->routeIs('berita')]) href="{{ route('berita') }}">Berita</a>
+            <a @class(['is-active' => request()->routeIs('agenda')]) href="{{ route('agenda') }}">Agenda</a>
+            <a @class(['is-active' => request()->routeIs('kontak')]) href="{{ route('kontak') }}">Kontak</a>
+        </nav>
+
+        <a class="site-header__admin" href="{{ route('admin.dashboard') }}">Portal Admin <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main class="site-main">
         @yield('content')
     </main>
+
+    <footer class="site-footer">
+        <div class="site-footer__inner">
+            <a class="site-brand site-brand--footer" href="{{ route('home') }}">
+                <span class="site-brand__mark" aria-hidden="true">SA</span>
+                <span class="site-brand__text">
+                    <strong>Desa Sedati Agung</strong>
+                    <small>Kabupaten Sidoarjo</small>
+                </span>
+            </a>
+            <p>Informasi dan layanan resmi Desa Sedati Agung.</p>
+            <span>© {{ now()->year }} Pemerintah Desa Sedati Agung</span>
+        </div>
+    </footer>
 </body>
 </html>

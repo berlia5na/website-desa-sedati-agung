@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ProfilBumdes extends Model
 {
@@ -20,7 +21,7 @@ class ProfilBumdes extends Model
         'logo',
     ];
 
-    public function unitBumdes()
+    public function unitBumdes(): HasMany
     {
         return $this->hasMany(UnitBumdes::class, 'bumdes_id');
     }

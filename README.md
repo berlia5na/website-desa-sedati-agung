@@ -54,6 +54,14 @@ In order to ensure that the Laravel community is welcoming to all, please review
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
+## Portal Admin
+
+Portal admin tersedia di `/admin/login` dan hanya menerima username serta kata sandi akun dengan role `admin`. Tidak ada kredensial bawaan atau registrasi publik.
+
+Setelah layanan database pada `.env` aktif, atur `ADMIN_USERNAME` dan `ADMIN_PASSWORD` di file `.env` lokal. Jangan menyimpan kredensial di source code atau mengirim file `.env` ke GitHub. Jalankan `php artisan migrate`, lalu `php artisan db:seed`. `DatabaseSeeder` memanggil `UserSeeder`, yang membuat akun admin jika belum ada atau memperbarui akun admin pertama yang sudah ada. Kata sandi otomatis di-hash oleh model.
+
+Masuk melalui `/admin/login`; keluar melalui tombol **Keluar** pada portal admin.
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

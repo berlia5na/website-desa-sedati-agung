@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class UnitBumdes extends Model
 {
@@ -18,7 +19,7 @@ class UnitBumdes extends Model
         'status',
     ];
 
-    public function profilBumdes()
+    public function profilBumdes(): BelongsTo
     {
         return $this->belongsTo(ProfilBumdes::class, 'bumdes_id');
     }

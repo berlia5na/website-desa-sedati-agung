@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -19,6 +20,7 @@ class User extends Authenticatable
 
     protected $hidden = [
         'password',
+        'remember_token',
     ];
 
     protected $casts = [
@@ -26,12 +28,12 @@ class User extends Authenticatable
         'role' => 'string',
     ];
 
-    public function berita()
+    public function berita(): HasMany
     {
         return $this->hasMany(Berita::class);
     }
 
-    public function agenda()
+    public function agenda(): HasMany
     {
         return $this->hasMany(Agenda::class);
     }

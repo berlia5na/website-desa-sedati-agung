@@ -9,15 +9,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            if (!Schema::hasColumn('users', 'username')) {
+            if (! Schema::hasColumn('users', 'username')) {
                 $table->string('username')->unique()->after('name');
             }
 
-            if (!Schema::hasColumn('users', 'role')) {
+            if (! Schema::hasColumn('users', 'role')) {
                 $table->string('role')->default('admin')->after('password');
             }
 
             if (Schema::hasColumn('users', 'email')) {
+                $table->dropUnique(['email']);
                 $table->dropColumn('email');
             }
 
@@ -34,23 +35,23 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            if (!Schema::hasColumn('users', 'username')) {
+            if (! Schema::hasColumn('users', 'username')) {
                 $table->string('username')->nullable()->unique()->after('name');
             }
 
-            if (!Schema::hasColumn('users', 'role')) {
+            if (! Schema::hasColumn('users', 'role')) {
                 $table->string('role')->nullable()->after('password');
             }
 
-            if (!Schema::hasColumn('users', 'email')) {
+            if (! Schema::hasColumn('users', 'email')) {
                 $table->string('email')->nullable()->unique()->after('name');
             }
 
-            if (!Schema::hasColumn('users', 'email_verified_at')) {
+            if (! Schema::hasColumn('users', 'email_verified_at')) {
                 $table->timestamp('email_verified_at')->nullable()->after('email');
             }
 
-            if (!Schema::hasColumn('users', 'remember_token')) {
+            if (! Schema::hasColumn('users', 'remember_token')) {
                 $table->rememberToken();
             }
         });
