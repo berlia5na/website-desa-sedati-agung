@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Dashboard\PageController as DashboardPageController;
 use App\Http\Controllers\Landing\PageController as LandingPageController;
+use App\Http\Controllers\ProfilDesaLengkapController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(LandingPageController::class)->group(function () {
@@ -37,3 +38,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         });
     });
 });
+
+Route::get('/profil-desa', [ProfilDesaLengkapController::class, 'index'])
+    ->name('profil-desa');

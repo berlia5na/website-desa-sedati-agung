@@ -19,5 +19,23 @@ class ProfilDesa extends Model
         'email',
         'website',
         'foto',
+        'subtitle',
+        'badge',
+        'judul',
+        'kutipan',
+        'nama_kades',
+        'jabatan_kades',
+        'caption_hero',
+        'visi_label',
+        'visi_catatan',
+        'sejarah_sorotan',
+        'periode_data',
+        'penduduk',
+        'luas_wilayah',
+        'jumlah_dusun',
+        'lahan_tani',
+        'jam_layanan',
+        'foto_kantor',
     ];
 }
+
