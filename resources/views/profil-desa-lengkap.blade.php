@@ -20,7 +20,7 @@
                 <img src="{{ asset(($profil->foto ?: 'images/hero-desa.jpg')) }}" alt="{{ $profil->caption_hero }}" onerror="this.style.display='none'">
                 <figcaption>
                     <span>{{ $profil->caption_hero }}</span>
-                    <small>Kecamatan Sedati</small>
+                    <small>{{ $profil->subtitle }}</small>
                 </figcaption>
             </figure>
         </div>
@@ -60,7 +60,7 @@
         <div class="sejarah">
             <div>
                 <span class="eyebrow eyebrow--orange">JEJAK LANGKAH &amp; PERKEMBANGAN</span>
-                <h2 class="title title--left">Sejarah Singkat<br>Desa Sedati Agung</h2>
+                <h2 class="title title--left">Sejarah Singkat<br>{{ $profil->nama_desa }}</h2>
                 <p class="muted">Perjalanan panjang desa pesisir dari masa ke masa, sudah menjadi pusat kehidupan warga dan kemajuan.</p>
                 <div class="highlight">
                     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#c2670a" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
@@ -87,25 +87,25 @@
 
         <div class="stats">
             <div class="stat">
-                <div class="stat__top"><span class="stat__icon stat__icon--blue">👥</span><small>PENDUDUK</small></div>
+                <div class="stat__top"><span class="stat__icon stat__icon--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.8a3.5 3.5 0 0 1 0 6.5M18 14a5.6 5.6 0 0 1 3.5 5"/></svg></span><small>PENDUDUK</small></div>
                 <strong>{{ number_format($profil->penduduk, 0, ',', '.') }}</strong>
                 <span>Total Penduduk</span>
                 <em>Jumlah jiwa terdaftar tahun ini</em>
             </div>
             <div class="stat">
-                <div class="stat__top"><span class="stat__icon stat__icon--orange">🗺️</span><small>WILAYAH</small></div>
+                <div class="stat__top"><span class="stat__icon stat__icon--orange" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 6 6-3 6 3 6-3v15l-6 3-6-3-6 3z"/><path d="M9 3v15M15 6v15"/></svg></span><small>WILAYAH</small></div>
                 <strong>{{ number_format($profil->luas_wilayah, 2, ',', '.') }} km²</strong>
                 <span>Luas Wilayah</span>
                 <em>Tertuju seluruhnya perkotaan atas pesisir</em>
             </div>
             <div class="stat">
-                <div class="stat__top"><span class="stat__icon stat__icon--blue">🏘️</span><small>Administrasi</small></div>
+                <div class="stat__top"><span class="stat__icon stat__icon--blue" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/><path d="M9 9h.01M15 9h.01"/></svg></span><small>Administrasi</small></div>
                 <strong>{{ $profil->jumlah_dusun }} Dusun</strong>
                 <span>Wilayah Administrasi</span>
                 <em>Dusun terpisah dan terkait</em>
             </div>
             <div class="stat">
-                <div class="stat__top"><span class="stat__icon stat__icon--orange">🌾</span><small>Aset Desa</small></div>
+                <div class="stat__top"><span class="stat__icon stat__icon--orange" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21v-9M12 12c-5 0-8-3-8-8 5 0 8 3 8 8ZM12 16c0-5 3-8 8-8 0 5-3 8-8 8Z"/></svg></span><small>Aset Desa</small></div>
                 <strong>{{ $profil->lahan_tani }} Ha</strong>
                 <span>Lahan Tani &amp; Tambak</span>
                 <em>Struktur desa dilengkapi tambak</em>
@@ -173,53 +173,33 @@
                     <span class="info__icon info__icon--orange">💬</span>
                     <div><strong>WhatsApp &amp; Pengaduan Warga</strong><b>{{ $profil->telepon }}</b><p>Layanan administrasi pengaduan di bagian umum.</p></div>
                 </div>
+                @if ($profil->email)
+                    <div class="info">
+                        <span class="info__icon">✉</span>
+                        <div><strong>Email Resmi</strong><p>{{ $profil->email }}</p></div>
+                    </div>
+                @endif
+                @if ($profil->website)
+                    <div class="info">
+                        <span class="info__icon">↗</span>
+                        <div><strong>Website</strong><p>{{ $profil->website }}</p></div>
+                    </div>
+                @endif
             </div>
 
-            <figure class="kantor__img">
-                <img src="{{ asset($profil->foto_kantor ?: 'images/kantor-desa.jpg') }}" alt="Kantor Balai Desa Sedati Agung" onerror="this.style.display='none'">
+            <figure class="kantor__map">
+                <iframe
+                    src="https://maps.google.com/maps?q={{ urlencode($lokasiPeta) }}&amp;output=embed"
+                    title="Peta lokasi {{ $profil->nama_desa }}"
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                ></iframe>
                 <figcaption>
-                    <strong>Balai Desa Sedati Agung</strong>
-                    <small>Antara tambak dan jl. Pemerintah menuju kantor desa.</small>
+                    <a href="https://www.google.com/maps/search/?api=1&amp;query={{ urlencode($lokasiPeta) }}" target="_blank" rel="noopener">
+                        Buka lokasi di Google Maps <span aria-hidden="true">↗</span>
+                    </a>
                 </figcaption>
             </figure>
-        </div>
-    </section>
-
-    {{-- FOOTER KHUSUS PROFIL DESA --}}
-    <section class="footer">
-        <div class="container">
-            <div class="footer__grid">
-                <div>
-                    <strong class="footer__brand">Desa Sedati Agung</strong>
-                    <p>Website resmi Desa Sedati Agung, Kabupaten Sidoarjo. Media informasi dan pelayanan bagi masyarakat desa.</p>
-                </div>
-
-                <div>
-                    <h5>Navigasi</h5>
-                    <a href="{{ route('home') }}">Beranda</a>
-                    <a href="{{ route('profil-desa') }}">Profil Desa</a>
-                    <a href="{{ route('profil-bumdes') }}">Profil BUMDES</a>
-                </div>
-
-                <div>
-                    <h5>Informasi</h5>
-                    <a href="{{ route('berita') }}">Berita Desa</a>
-                    <a href="{{ route('agenda') }}">Agenda Kegiatan</a>
-                    <a href="{{ route('kontak') }}">Kontak</a>
-                </div>
-
-                <div>
-                    <h5>Pelayanan</h5>
-                    <p>Jam layanan: {{ $profil->jam_layanan }}</p>
-                    <p>Telepon: {{ $profil->telepon }}</p>
-                    <p>Alamat: {{ $profil->alamat }}</p>
-                </div>
-            </div>
-
-            <div class="footer__bottom">
-                <span>&copy; {{ now()->year }} Pemerintah Desa Sedati Agung</span>
-                <span>Website Desa Sedati Agung</span>
-            </div>
         </div>
     </section>
 

@@ -36,6 +36,6 @@ class ProfilDesa extends Model
         'lahan_tani',
         'jam_layanan',
         'foto_kantor',
+        'lokasi_peta',
     ];
 }
-

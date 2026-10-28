@@ -29,7 +29,7 @@ ul { list-style: none; }
 .section { padding: 56px 0 8px; }
 .section--center { text-align: center; }
 
-h1, h2, h3, h4, .brand__text strong, .footer__brand {
+h1, h2, h3, h4, .brand__text strong {
     font-family: 'Source Serif 4', Georgia, serif;
     color: var(--navy);
 }
@@ -120,9 +120,10 @@ h1, h2, h3, h4, .brand__text strong, .footer__brand {
 .stat { background: var(--bg); border-radius: 14px; padding: 18px; }
 .stat__top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .stat__top small { font-size: 9px; font-weight: 600; color: var(--muted); letter-spacing: .05em; }
-.stat__icon { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; font-size: 14px; }
-.stat__icon--blue { background: var(--blue-icon); }
-.stat__icon--orange { background: var(--orange-soft); }
+.stat .stat__icon { display: grid; width: 30px; height: 30px; flex: 0 0 30px; place-items: center; margin: 0; border-radius: 8px; font-size: 14px; line-height: 1; }
+.stat__icon svg { display: block; width: 17px; height: 17px; }
+.stat__icon--blue { background: var(--blue-icon); color: var(--navy); }
+.stat__icon--orange { background: var(--orange-soft); color: var(--orange); }
 .stat strong { display: block; font-family: 'Source Serif 4', serif; font-size: 26px; color: var(--navy); line-height: 1.1; }
 .stat span { display: block; font-weight: 600; font-size: 12px; margin-top: 4px; }
 .stat em { display: block; font-style: normal; font-size: 10px; color: var(--muted); margin-top: 2px; }
@@ -147,27 +148,15 @@ h1, h2, h3, h4, .brand__text strong, .footer__brand {
 .info strong { display: block; font-size: 12px; color: var(--navy); }
 .info p { font-size: 10px; color: var(--muted); }
 .info b { display: block; font-size: 12px; color: var(--orange); }
-.kantor__img { position: relative; border-radius: 16px; overflow: hidden; background: linear-gradient(135deg, #8aa5c0, #5f7f9f); aspect-ratio: 4 / 3; }
-.kantor__img img { width: 100%; height: 100%; object-fit: cover; }
-.kantor__img figcaption {
-    position: absolute; left: 12px; top: 12px; background: rgba(255, 255, 255, .95);
-    border-radius: 10px; padding: 8px 12px; max-width: 70%;
+.kantor__map { position: relative; min-width: 0; overflow: hidden; border-radius: 16px; background: #e9edf2; aspect-ratio: 4 / 3; }
+.kantor__map iframe { width: 100%; height: 100%; min-height: 280px; border: 0; }
+.kantor__map figcaption {
+    position: absolute; right: 12px; bottom: 12px; left: 12px; width: fit-content;
+    max-width: calc(100% - 24px); padding: 8px 12px; border-radius: 10px;
+    background: rgba(255, 255, 255, .95); font-size: 11px; font-weight: 650;
 }
-.kantor__img figcaption strong { display: block; font-size: 11px; color: var(--navy); }
-.kantor__img figcaption small { font-size: 9px; color: var(--muted); }
-
-/* FOOTER */
-.footer { background: #e9edf2; margin-top: 56px; padding: 36px 0 18px; }
-.footer__grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
-.footer__brand { font-size: 16px; display: block; margin-bottom: 8px; }
-.footer p, .footer small { font-size: 10px; color: var(--muted); }
-.footer h5 { font-size: 11px; color: var(--navy); margin-bottom: 10px; }
-.footer__grid a { display: block; font-size: 10px; color: var(--muted); margin-bottom: 6px; }
-.footer__bottom {
-    margin-top: 28px; padding-top: 14px; border-top: 1px solid #d5dbe3;
-    display: flex; justify-content: space-between; font-size: 9px; color: var(--muted);
-}
-.footer__bottom a { margin-left: 14px; }
+.kantor__map figcaption a { color: var(--navy); }
+.kantor__map figcaption a:hover { color: var(--orange); }
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
@@ -175,6 +164,5 @@ h1, h2, h3, h4, .brand__text strong, .footer__brand {
     .hero, .grid-2, .sejarah, .kantor { grid-template-columns: 1fr; }
     .hero { padding: 28px; }
     .stats, .team { grid-template-columns: repeat(2, 1fr); }
-    .footer__grid { grid-template-columns: 1fr 1fr; }
-    .head-row, .footer__bottom { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .head-row { flex-direction: column; align-items: flex-start; gap: 10px; }
 }

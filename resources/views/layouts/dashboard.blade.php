@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Portal Admin | Desa Sedati Agung')</title>
+    @if (request()->routeIs('admin.profil-desa'))
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+    @endif
     <script>
         try {
             if (localStorage.getItem('desa-admin-theme') === 'dark') {
@@ -15,8 +20,12 @@
         }
     </script>
     @vite(['resources/css/admin.css', 'resources/css/admin-beranda.css', 'resources/js/admin-beranda.js'])
+    @if (request()->routeIs('admin.profil-desa'))
+        <link rel="stylesheet" href="{{ asset('css/admin-profil-desa.css') }}">
+        <script src="{{ asset('js/admin-profil-desa.js') }}" defer></script>
+    @endif
 </head>
-<body class="admin-body">
+<body @class(['admin-body', 'admin-profil-desa-page' => request()->routeIs('admin.profil-desa')])>
     <div class="admin-shell">
         <aside class="admin-sidebar" id="admin-sidebar">
             <a class="admin-brand" href="{{ route('admin.dashboard') }}">

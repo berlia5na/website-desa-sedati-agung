@@ -31,6 +31,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/beranda/sambutan', 'deleteSambutan')->name('beranda.sambutan.delete');
             Route::put('/beranda/statistik', 'updateStatistik')->name('beranda.statistik.update');
             Route::get('/profil-desa', 'profilDesa')->name('profil-desa');
+            Route::put('/profil-desa', 'updateProfilDesa')->name('profil-desa.update');
             Route::get('/berita', 'berita')->name('berita');
             Route::get('/profil-bumdes', 'profilBumdes')->name('profil-bumdes');
             Route::get('/agenda', 'agenda')->name('agenda');

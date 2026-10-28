@@ -44,7 +44,8 @@ class ProfilDesaLengkapController extends Controller
         }
 
         $perangkat = PerangkatDesa::orderBy('urutan')->get();
+        $lokasiPeta = trim($profil->lokasi_peta ?: $profil->alamat ?: 'Desa Sedati Agung, Kecamatan Sedati, Kabupaten Sidoarjo');
 
-        return view('profil-desa-lengkap', compact('profil', 'perangkat'));
+        return view('profil-desa-lengkap', compact('profil', 'perangkat', 'lokasiPeta'));
     }
 }
