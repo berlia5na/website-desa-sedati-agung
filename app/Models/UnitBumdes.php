@@ -15,6 +15,7 @@ class UnitBumdes extends Model
         'jenis',
         'deskripsi',
         'harga',
+        'telepon',
         'gambar',
         'status',
     ];

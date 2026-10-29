@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Agenda;
 use App\Models\Berita;
 use App\Models\HalamanBeranda;
+use App\Models\ProfilBumdes;
 use App\Models\StatistikDesa;
 
 class PageController extends Controller
@@ -62,7 +63,11 @@ class PageController extends Controller
 
     public function profilBumdes()
     {
-        return view('landing.profil-bumdes');
+        $profilBumdes = ProfilBumdes::query()
+            ->with(['unitBumdes' => fn ($query) => $query->where('status', 'aktif')->latest()])
+            ->first();
+
+        return view('landing.profil-bumdes', compact('profilBumdes'));
     }
 
     public function berita()

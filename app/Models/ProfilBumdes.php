@@ -18,8 +18,18 @@ class ProfilBumdes extends Model
         'alamat',
         'telepon',
         'email',
-        'logo',
+        'foto',
+        'legalitas',
+        'pengurus',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'legalitas' => 'array',
+            'pengurus' => 'array',
+        ];
+    }
 
     public function unitBumdes(): HasMany
     {

@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Portal Admin | Desa Sedati Agung')</title>
+    @if (request()->routeIs('admin.profil-bumdes'))
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    @endif
     @if (request()->routeIs('admin.profil-desa'))
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,6 +25,9 @@
         }
     </script>
     @vite(['resources/css/admin.css', 'resources/css/admin-beranda.css', 'resources/js/admin-beranda.js'])
+    @if (request()->routeIs('admin.profil-bumdes'))
+        @vite('resources/js/admin-profil-bumdes.js')
+    @endif
     @if (request()->routeIs('admin.profil-desa'))
         <link rel="stylesheet" href="{{ asset('css/admin-profil-desa.css') }}">
         <script src="{{ asset('js/admin-profil-desa.js') }}" defer></script>

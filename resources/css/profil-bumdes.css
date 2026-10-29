@@ -1,0 +1,933 @@
+.bumdes-page {
+    --bumdes-blue: #2d6197;
+    --bumdes-blue-dark: #153f6a;
+    --bumdes-ink: #24394b;
+    --bumdes-muted: #687783;
+    --bumdes-brown: #8d4b00;
+    --bumdes-orange: #ffd9b9;
+    --bumdes-line: rgba(45, 97, 151, .12);
+    --bumdes-shadow: 0 18px 48px rgba(27, 62, 91, .08);
+    overflow: hidden;
+    padding: 38px 24px 104px;
+    background:
+        radial-gradient(ellipse at 88% 8%, rgba(255, 220, 195, .2), transparent 25%),
+        #fff;
+    color: var(--bumdes-ink);
+    font-family: 'Public Sans', Arial, sans-serif;
+}
+
+.bumdes-page *,
+.bumdes-page *::before,
+.bumdes-page *::after {
+    box-sizing: border-box;
+}
+
+.bumdes-hero,
+.bumdes-section {
+    width: min(1200px, 100%);
+    margin-inline: auto;
+}
+
+.bumdes-hero {
+    position: relative;
+    display: grid;
+    min-height: 570px;
+    grid-template-columns: minmax(0, 1.05fr) minmax(340px, .95fr);
+    align-items: center;
+    gap: clamp(32px, 6vw, 82px);
+    overflow: hidden;
+    padding: clamp(36px, 6vw, 72px);
+    border: 1px solid rgba(219, 194, 176, .4);
+    border-radius: 40px;
+    background:
+        radial-gradient(ellipse at 85% 22%, rgba(210, 228, 255, .85), transparent 32%),
+        linear-gradient(125deg, #fff 14%, #fffaf5 100%);
+    box-shadow: var(--bumdes-shadow);
+}
+
+.bumdes-hero__content {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+}
+
+.bumdes-eyebrow,
+.bumdes-section__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--bumdes-brown);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+.bumdes-eyebrow {
+    padding: 9px 14px;
+    border-radius: 999px;
+    background: #fff0e4;
+    letter-spacing: .07em;
+}
+
+.bumdes-eyebrow > span {
+    font-size: 14px;
+}
+
+.bumdes-hero h1 {
+    margin: 22px 0 4px;
+    color: var(--bumdes-blue);
+    font-family: var(--serif, Georgia, serif);
+    font-size: clamp(42px, 5vw, 62px);
+    font-weight: 800;
+    letter-spacing: -.045em;
+    line-height: 1.08;
+}
+
+.bumdes-hero__location {
+    margin: 0;
+    color: var(--bumdes-brown);
+    font-family: var(--serif, Georgia, serif);
+    font-size: clamp(21px, 2.7vw, 32px);
+    font-weight: 700;
+}
+
+.bumdes-hero__location span {
+    color: #d3a47c;
+}
+
+.bumdes-hero__description {
+    max-width: 590px;
+    margin: 22px 0 0;
+    color: #5e6d78;
+    font-size: 16px;
+    line-height: 1.85;
+}
+
+.bumdes-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 27px;
+}
+
+.bumdes-button {
+    display: inline-flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 12px 20px;
+    border: 1px solid var(--bumdes-blue);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    transition: transform .2s ease, background .2s ease, color .2s ease;
+}
+
+.bumdes-button:hover {
+    transform: translateY(-2px);
+}
+
+.bumdes-button--primary {
+    background: var(--bumdes-blue);
+    color: #fff;
+}
+
+.bumdes-button--primary:hover {
+    background: var(--bumdes-blue-dark);
+}
+
+.bumdes-button--outline {
+    background: transparent;
+    color: var(--bumdes-blue);
+}
+
+.bumdes-button--outline:hover {
+    background: #edf5fd;
+}
+
+.bumdes-hero__stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 31px;
+    padding-top: 23px;
+    border-top: 1px solid var(--bumdes-line);
+}
+
+.bumdes-hero__stats div {
+    display: grid;
+    align-content: start;
+    gap: 5px;
+}
+
+.bumdes-hero__stats strong {
+    color: var(--bumdes-blue);
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.bumdes-hero__stats span {
+    color: var(--bumdes-muted);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.bumdes-hero__art {
+    position: relative;
+    min-height: 380px;
+}
+
+.bumdes-photo-card,
+.bumdes-photo-card--empty {
+    position: relative;
+    display: flex;
+    min-height: 380px;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    margin: 0;
+    border: 1px solid rgba(219, 194, 176, .4);
+    border-radius: 28px;
+    background: linear-gradient(145deg, #dceaf6, #fff0e4);
+    box-shadow: 0 18px 42px rgba(31, 64, 92, .16);
+}
+
+.bumdes-photo-card > img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bumdes-photo-card figcaption {
+    position: relative;
+    display: grid;
+    gap: 8px;
+    padding: 28px 24px;
+    background: linear-gradient(0deg, rgba(13, 37, 59, .86), rgba(13, 37, 59, 0));
+    color: #fff;
+}
+
+.bumdes-photo-card__badge {
+    width: fit-content;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .2);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.bumdes-photo-card figcaption strong {
+    font-family: var(--serif, Georgia, serif);
+    font-size: 24px;
+}
+
+.bumdes-photo-card figcaption > span:last-child {
+    color: rgba(255, 255, 255, .9);
+    font-size: 14px;
+}
+
+.bumdes-photo-card--empty {
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 24px;
+    color: var(--bumdes-blue);
+    text-align: center;
+}
+
+.bumdes-photo-card__icon {
+    display: grid;
+    width: 68px;
+    height: 68px;
+    place-items: center;
+    border-radius: 20px;
+    background: #e7f0fb;
+    color: var(--bumdes-blue);
+    font-size: 32px;
+}
+
+.bumdes-photo-card--empty > strong {
+    font-family: var(--serif, Georgia, serif);
+    font-size: 22px;
+}
+
+.bumdes-photo-card--empty > span:last-child {
+    color: var(--bumdes-muted);
+    font-size: 14px;
+}
+
+.bumdes-section {
+    padding-top: 112px;
+}
+
+.bumdes-section__heading {
+    margin-bottom: 30px;
+}
+
+.bumdes-section__heading--split {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 38px;
+}
+
+.bumdes-section__heading h2 {
+    margin: 8px 0 0;
+    color: var(--bumdes-blue);
+    font-family: var(--serif, Georgia, serif);
+    font-size: clamp(30px, 3.2vw, 40px);
+    font-weight: 700;
+    letter-spacing: -.03em;
+    line-height: 1.18;
+}
+
+.bumdes-section__heading > p {
+    max-width: 430px;
+    margin: 0;
+    color: var(--bumdes-muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.bumdes-legal__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.bumdes-info-card {
+    display: flex;
+    min-height: 260px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 25px;
+    border: 1px solid var(--bumdes-line);
+    border-radius: 24px;
+    background: #fff;
+    box-shadow: 0 8px 26px rgba(27, 62, 91, .045);
+}
+
+.bumdes-info-card__icon {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    background: #fff0e4;
+    color: var(--bumdes-brown);
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.bumdes-info-card--blue .bumdes-info-card__icon {
+    background: #e7f0fb;
+    color: var(--bumdes-blue);
+}
+
+.bumdes-info-card--green .bumdes-info-card__icon {
+    background: #e6f4ed;
+    color: #327855;
+}
+
+.bumdes-info-card__label {
+    color: var(--bumdes-muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .13em;
+}
+
+.bumdes-info-card h3 {
+    margin: 7px 0;
+    color: var(--bumdes-blue);
+    font-family: var(--serif, Georgia, serif);
+    font-size: 21px;
+}
+
+.bumdes-info-card p {
+    margin: 0 0 18px;
+    color: var(--bumdes-muted);
+    font-size: 13px;
+    line-height: 1.75;
+}
+
+.bumdes-info-card__note {
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid var(--bumdes-line);
+    color: var(--bumdes-brown);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.bumdes-vision .bumdes-section__heading--center {
+    max-width: 720px;
+    margin: 0 auto 34px;
+    text-align: center;
+}
+
+.bumdes-section__heading--center > p {
+    margin: 12px auto 0;
+}
+
+.bumdes-vision__layout {
+    display: grid;
+    grid-template-columns: .82fr 1.18fr;
+    gap: 20px;
+}
+
+.bumdes-vision__statement {
+    position: relative;
+    display: flex;
+    min-height: 400px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    overflow: hidden;
+    padding: 34px;
+    border-radius: 28px;
+    background:
+        radial-gradient(circle at 88% 14%, rgba(255, 255, 255, .13), transparent 27%),
+        linear-gradient(145deg, #214f7d, #123657);
+    color: #fff;
+}
+
+.bumdes-vision__quote {
+    position: absolute;
+    top: 7px;
+    left: 24px;
+    color: rgba(255, 255, 255, .15);
+    font-family: Georgia, serif;
+    font-size: 130px;
+    line-height: 1;
+}
+
+.bumdes-vision__statement .bumdes-section__eyebrow {
+    position: relative;
+    color: #ffd9b9;
+}
+
+.bumdes-vision__statement h3 {
+    position: relative;
+    max-width: 340px;
+    margin: 12px 0;
+    font-family: var(--serif, Georgia, serif);
+    font-size: 29px;
+    line-height: 1.2;
+}
+
+.bumdes-vision__statement p {
+    position: relative;
+    margin: 0;
+    color: rgba(255, 255, 255, .82);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.bumdes-vision__decoration {
+    position: absolute;
+    top: 48px;
+    right: 30px;
+    color: rgba(255, 255, 255, .08);
+    font-family: var(--serif, Georgia, serif);
+    font-size: 80px;
+    font-weight: 800;
+}
+
+.bumdes-mission-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.bumdes-mission-card {
+    display: flex;
+    min-height: 190px;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 22px;
+    border: 1px solid var(--bumdes-line);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 8px 26px rgba(27, 62, 91, .045);
+}
+
+.bumdes-mission-card__number {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border-radius: 50%;
+    background: #fff0e4;
+    color: var(--bumdes-brown);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.bumdes-mission-card:nth-child(even) .bumdes-mission-card__number {
+    background: #e7f0fb;
+    color: var(--bumdes-blue);
+}
+
+.bumdes-mission-card .bumdes-section__eyebrow {
+    font-size: 9px;
+}
+
+.bumdes-mission-card p {
+    margin: 6px 0 0;
+    color: var(--bumdes-ink);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.7;
+}
+
+.bumdes-status {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 13px;
+    border: 1px solid var(--bumdes-line);
+    border-radius: 999px;
+    background: #f7fafc;
+    color: var(--bumdes-muted);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.bumdes-status > span,
+.bumdes-unit-card__status > span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #37a36b;
+}
+
+.bumdes-management__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 18px;
+}
+
+.bumdes-role-card {
+    display: flex;
+    min-height: 220px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 24px;
+    border: 1px solid var(--bumdes-line);
+    border-radius: 20px;
+    background: #fff;
+    box-shadow: 0 8px 26px rgba(27, 62, 91, .05);
+}
+
+.bumdes-role-card__avatar {
+    display: grid;
+    width: 68px;
+    height: 68px;
+    place-items: center;
+    border: 1px solid rgba(45, 97, 151, .13);
+    border-radius: 50%;
+    background: #edf4fb;
+    color: var(--bumdes-blue);
+    font-family: var(--serif, Georgia, serif);
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.bumdes-role-card__photo {
+    width: 88px;
+    height: 88px;
+    border: 1px solid rgba(45, 97, 151, .13);
+    border-radius: 18px;
+    object-fit: cover;
+    box-shadow: 0 6px 18px rgba(27, 62, 91, .1);
+}
+
+.bumdes-role-card h3 {
+    margin: 0;
+    color: var(--bumdes-blue);
+    font-family: var(--serif, Georgia, serif);
+    font-size: 23px;
+    line-height: 1.3;
+}
+
+.bumdes-role-card__position {
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: #fff0e4;
+    color: var(--bumdes-brown);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.bumdes-role-card p {
+    max-width: 320px;
+    margin: 0;
+    color: var(--bumdes-muted);
+    font-size: 15px;
+    line-height: 1.65;
+}
+
+.bumdes-management__empty {
+    display: flex;
+    min-height: 120px;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    border: 1px dashed rgba(45, 97, 151, .3);
+    border-radius: 20px;
+    background: #f7fafc;
+    color: var(--bumdes-muted);
+}
+
+.bumdes-management__empty > span {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 15px;
+    background: #e7f0fb;
+    color: var(--bumdes-blue);
+    font-size: 24px;
+}
+
+.bumdes-management__empty p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.bumdes-units__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.bumdes-unit-card {
+    overflow: hidden;
+    border: 1px solid var(--bumdes-line);
+    border-radius: 26px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(27, 62, 91, .06);
+}
+
+.bumdes-unit-card__image {
+    position: relative;
+    display: grid;
+    height: 190px;
+    place-items: center;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 72% 25%, rgba(255, 255, 255, .8), transparent 20%),
+        linear-gradient(135deg, #e1edf8, #fff0e4);
+}
+
+.bumdes-unit-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bumdes-unit-card__placeholder {
+    display: grid;
+    width: 74px;
+    height: 74px;
+    place-items: center;
+    border: 1px solid rgba(255, 255, 255, .9);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, .68);
+    color: var(--bumdes-blue);
+    font-size: 34px;
+    box-shadow: 0 10px 26px rgba(27, 62, 91, .08);
+}
+
+.bumdes-unit-card__category {
+    position: absolute;
+    top: 13px;
+    left: 13px;
+    max-width: calc(100% - 26px);
+    overflow: hidden;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .92);
+    color: var(--bumdes-blue);
+    font-size: 10px;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bumdes-unit-card__body {
+    padding: 22px;
+}
+
+.bumdes-unit-card__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #327855;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.bumdes-unit-card__status > span {
+    width: 6px;
+    height: 6px;
+}
+
+.bumdes-unit-card h3 {
+    margin: 9px 0;
+    color: var(--bumdes-blue);
+    font-family: var(--serif, Georgia, serif);
+    font-size: 22px;
+    line-height: 1.25;
+}
+
+.bumdes-unit-card p {
+    min-height: 68px;
+    margin: 0;
+    color: var(--bumdes-muted);
+    font-size: 13px;
+    line-height: 1.75;
+}
+
+.bumdes-unit-card__price {
+    display: inline-block;
+    margin-top: 14px;
+    color: var(--bumdes-brown);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.bumdes-unit-card__contact {
+    display: flex;
+    min-height: 46px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    padding: 10px 14px;
+    border: 1px solid rgba(45, 97, 151, .25);
+    border-radius: 12px;
+    background: #edf4fb;
+    color: var(--bumdes-blue);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.bumdes-unit-card__contact:hover {
+    background: #e0edf9;
+}
+
+.bumdes-unit-card__contact:focus-visible {
+    outline: 3px solid rgba(45, 97, 151, .35);
+    outline-offset: 3px;
+}
+
+.bumdes-units__empty {
+    display: grid;
+    min-height: 260px;
+    align-content: center;
+    justify-items: center;
+    padding: 36px;
+    border: 1px dashed rgba(45, 97, 151, .25);
+    border-radius: 26px;
+    background: linear-gradient(135deg, #f8fbfe, #fffaf5);
+    text-align: center;
+}
+
+.bumdes-units__empty > span {
+    display: grid;
+    width: 52px;
+    height: 52px;
+    place-items: center;
+    border-radius: 17px;
+    background: #e7f0fb;
+    color: var(--bumdes-blue);
+    font-size: 23px;
+}
+
+.bumdes-units__empty h3 {
+    margin: 15px 0 5px;
+    color: var(--bumdes-blue);
+    font-family: var(--serif, Georgia, serif);
+    font-size: 22px;
+}
+
+.bumdes-units__empty p {
+    max-width: 470px;
+    margin: 0;
+    color: var(--bumdes-muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+    .bumdes-page {
+        padding-top: 24px;
+    }
+
+    .bumdes-hero {
+        min-height: auto;
+        grid-template-columns: 1fr .8fr;
+        gap: 20px;
+        padding: 42px;
+    }
+
+    .bumdes-hero__art {
+        min-height: 310px;
+    }
+
+    .bumdes-section {
+        padding-top: 82px;
+    }
+
+    .bumdes-vision__layout {
+        grid-template-columns: 1fr;
+    }
+
+    .bumdes-vision__statement {
+        min-height: 290px;
+    }
+
+    .bumdes-management__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .bumdes-page {
+        padding: 18px 18px 72px;
+    }
+
+    .bumdes-hero {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        padding: 28px 22px 24px;
+        border-radius: 28px;
+    }
+
+    .bumdes-hero h1 {
+        margin-top: 18px;
+        font-size: clamp(39px, 11vw, 52px);
+    }
+
+    .bumdes-hero__description {
+        margin-top: 16px;
+        font-size: 14px;
+    }
+
+    .bumdes-hero__stats {
+        gap: 10px;
+        margin-top: 22px;
+        padding-top: 18px;
+    }
+
+    .bumdes-hero__stats strong {
+        font-size: 17px;
+    }
+
+    .bumdes-hero__stats span {
+        font-size: 9px;
+    }
+
+    .bumdes-hero__art,
+    .bumdes-photo-card,
+    .bumdes-photo-card--empty {
+        min-height: 270px;
+        margin-top: 4px;
+    }
+
+    .bumdes-section {
+        padding-top: 70px;
+    }
+
+    .bumdes-section__heading--split {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .bumdes-section__heading {
+        margin-bottom: 22px;
+    }
+
+    .bumdes-section__heading h2 {
+        font-size: 32px;
+    }
+
+    .bumdes-section__heading > p {
+        font-size: 13px;
+    }
+
+    .bumdes-legal__grid,
+    .bumdes-mission-grid,
+    .bumdes-units__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bumdes-info-card {
+        min-height: 230px;
+    }
+
+    .bumdes-vision .bumdes-section__heading--center {
+        text-align: left;
+    }
+
+    .bumdes-vision .bumdes-section__heading--center > p {
+        margin-inline: 0;
+    }
+
+    .bumdes-vision__statement {
+        min-height: 315px;
+        padding: 26px;
+    }
+
+    .bumdes-mission-card {
+        min-height: 150px;
+    }
+
+    .bumdes-management__grid {
+        gap: 12px;
+    }
+
+    .bumdes-role-card {
+        min-height: 190px;
+        padding: 20px;
+    }
+
+    .bumdes-role-card__avatar {
+        width: 58px;
+        height: 58px;
+    }
+
+    .bumdes-role-card h3 {
+        font-size: 21px;
+    }
+
+    .bumdes-role-card p {
+        font-size: 14px;
+    }
+
+    .bumdes-role-card__position {
+        font-size: 13px;
+    }
+
+    .bumdes-unit-card p {
+        min-height: auto;
+    }
+}

@@ -34,6 +34,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::put('/profil-desa', 'updateProfilDesa')->name('profil-desa.update');
             Route::get('/berita', 'berita')->name('berita');
             Route::get('/profil-bumdes', 'profilBumdes')->name('profil-bumdes');
+            Route::put('/profil-bumdes', 'updateProfilBumdes')->name('profil-bumdes.update');
             Route::get('/agenda', 'agenda')->name('agenda');
             Route::get('/kontak', 'kontak')->name('kontak');
         });
