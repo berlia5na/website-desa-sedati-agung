@@ -55,7 +55,7 @@
                 <a class="admin-nav__link {{ request()->routeIs('admin.profil-desa') ? 'is-active' : '' }}" href="{{ route('admin.profil-desa') }}" data-search-label="profil desa">
                     <span class="admin-nav__icon" aria-hidden="true">⌖</span><span>Profil Desa</span>
                 </a>
-                <a class="admin-nav__link {{ request()->routeIs('admin.berita') ? 'is-active' : '' }}" href="{{ route('admin.berita') }}" data-search-label="berita kegiatan">
+                <a class="admin-nav__link {{ request()->routeIs('admin.berita*') ? 'is-active' : '' }}" href="{{ route('admin.berita') }}" data-search-label="berita kegiatan">
                     <span class="admin-nav__icon" aria-hidden="true">▤</span><span>Berita &amp; Kegiatan</span>
                 </a>
                 <a class="admin-nav__link {{ request()->routeIs('admin.profil-bumdes') ? 'is-active' : '' }}" href="{{ route('admin.profil-bumdes') }}" data-search-label="profil bumdes">

@@ -16,6 +16,7 @@ class ExampleTest extends TestCase
             '/profil-desa',
             '/profil-bumdes',
             '/berita',
+            '/galeri',
             '/agenda',
             '/kontak',
         ];
@@ -30,5 +31,15 @@ class ExampleTest extends TestCase
         foreach (['/admin', '/admin/beranda', '/admin/profil-desa', '/admin/berita', '/admin/profil-bumdes', '/admin/agenda', '/admin/kontak'] as $path) {
             $this->get($path)->assertRedirect(route('admin.login'));
         }
+    }
+
+    public function test_gallery_is_reached_from_news_instead_of_the_main_navigation(): void
+    {
+        $this->get(route('berita'))
+            ->assertOk()
+            ->assertSee('Lihat Semua Galeri')
+            ->assertSee(route('galeri'))
+            ->assertSee('href="'.route('kontak').'">Kontak</a>', false)
+            ->assertDontSee('href="'.route('galeri').'">Galeri</a>', false);
     }
 }

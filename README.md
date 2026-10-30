@@ -58,7 +58,9 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 Portal admin tersedia di `/admin/login` dan hanya menerima username serta kata sandi akun dengan role `admin`. Tidak ada kredensial bawaan atau registrasi publik.
 
-Setelah layanan database pada `.env` aktif, atur `ADMIN_USERNAME` dan `ADMIN_PASSWORD` di file `.env` lokal. Jangan menyimpan kredensial di source code atau mengirim file `.env` ke GitHub. Jalankan `php artisan migrate`, lalu `php artisan db:seed`. `DatabaseSeeder` memanggil `UserSeeder`, yang membuat akun admin jika belum ada atau memperbarui akun admin pertama yang sudah ada. Kata sandi otomatis di-hash oleh model.
+Login memakai akun admin yang sudah tersimpan di database; variabel `ADMIN_USERNAME` dan `ADMIN_PASSWORD` tidak dibaca saat proses login. Untuk mengatur atau memulihkan kredensial admin tanpa menyimpan kata sandi di `.env`, jalankan `php artisan admin:reset-login`, lalu masukkan nama pengguna dan kata sandi baru pada prompt terminal. Kata sandi tidak ditampilkan dan wajib minimal 12 karakter.
+
+Untuk membuat atau memperbarui akun admin saat seeding, isi `ADMIN_USERNAME` dan `ADMIN_PASSWORD` di `.env` lokal, kemudian jalankan `php artisan db:seed --class="Database\\Seeders\\UserSeeder"`. Jangan menyimpan kredensial di source code atau mengirim file `.env` ke GitHub. Kata sandi otomatis di-hash oleh model.
 
 Masuk melalui `/admin/login`; keluar melalui tombol **Keluar** pada portal admin.
 

@@ -204,4 +204,34 @@ class AdminLoginTest extends TestCase
             'nama_desa' => 'Desa Sedati Agung',
         ]);
     }
+
+    public function test_admin_can_reset_login_credentials_without_environment_variables(): void
+    {
+        $admin = User::factory()->create([
+            'username' => 'old_admin',
+            'password' => 'old-password',
+        ]);
+
+        $this->artisan('admin:reset-login')
+            ->expectsQuestion('Nama pengguna admin', 'new_admin')
+            ->expectsQuestion('Kata sandi baru (minimal 12 karakter)', 'a-new-secure-password')
+            ->expectsQuestion('Ulangi kata sandi baru', 'a-new-secure-password')
+            ->expectsOutputToContain('Kredensial admin berhasil diperbarui')
+            ->assertExitCode(0);
+
+        $admin->refresh();
+        $this->assertSame('new_admin', $admin->username);
+        $this->assertTrue(Hash::check('a-new-secure-password', $admin->password));
+    }
+
+    public function test_admin_credential_reset_rejects_short_passwords(): void
+    {
+        $this->artisan('admin:reset-login')
+            ->expectsQuestion('Nama pengguna admin', 'new_admin')
+            ->expectsQuestion('Kata sandi baru (minimal 12 karakter)', 'short')
+            ->expectsOutputToContain('Kata sandi harus memiliki minimal 12 karakter')
+            ->assertExitCode(1);
+
+        $this->assertDatabaseCount('users', 0);
+    }
 }

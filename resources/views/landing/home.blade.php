@@ -96,7 +96,7 @@
                 <div class="home-news__grid">
                     @foreach ($sorotanTerkini as $sorotan)
                         @php($jenisBerita = $sorotan->jenis_sorotan === 'berita')
-                        <a class="home-news-card" href="{{ route($jenisBerita ? 'berita' : 'agenda') }}">
+                        <a class="home-news-card" href="{{ route($jenisBerita ? 'berita.detail' : 'agenda', $jenisBerita ? $sorotan->slug : []) }}">
                             <span class="home-news-card__date">{{ $jenisBerita ? 'Berita desa' : 'Agenda desa' }}</span>
                             <h3>{{ $sorotan->judul }}</h3>
                             <p>{{ \Illuminate\Support\Str::limit(strip_tags($jenisBerita ? $sorotan->isi : $sorotan->deskripsi), 130) }}</p>
@@ -119,7 +119,7 @@
 
             <div class="home-news__grid">
                 @forelse ($beritaTerkini as $berita)
-                    <a class="home-news-card" href="{{ route('berita') }}">
+                    <a class="home-news-card" href="{{ route('berita.detail', $berita->slug) }}">
                         <span class="home-news-card__date">{{ $berita->created_at->format('d/m/Y') }}</span>
                         <h3>{{ $berita->judul }}</h3>
                         <p>{{ \Illuminate\Support\Str::limit(strip_tags($berita->isi), 130) }}</p>
