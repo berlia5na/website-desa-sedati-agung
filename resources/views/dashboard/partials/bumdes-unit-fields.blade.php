@@ -52,6 +52,7 @@
             <input id="unit-{{ $index }}-gambar" name="unit[{{ $index }}][gambar]" type="file" accept="image/*">
             @if (!empty($unit['gambar_tersimpan']))
                 <small class="bumdes-editor__hint">Foto saat ini: {{ basename($unit['gambar_tersimpan']) }}. Unggah file baru jika ingin menggantinya.</small>
+                <label class="bumdes-editor__hint"><input type="checkbox" name="unit[{{ $index }}][hapus_gambar]" value="1" @checked(old("unit.$index.hapus_gambar"))> Hapus foto unit saat disimpan</label>
             @endif
             @error("unit.$index.gambar") <small class="form-error">{{ $message }}</small> @enderror
         </div>

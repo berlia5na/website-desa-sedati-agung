@@ -175,4 +175,49 @@ class ProfilDesaManagementTest extends TestCase
 
         $this->assertDatabaseCount('profil_desa', 0);
     }
+
+    public function test_admin_can_remove_profile_photos_without_removing_profile_records(): void
+    {
+        Storage::fake('public');
+        $admin = User::factory()->create();
+        $profilePhoto = UploadedFile::fake()->image('profil.jpg')->store('profil-desa', 'public');
+        $officialPhoto = UploadedFile::fake()->image('perangkat.jpg')->store('profil-desa', 'public');
+        $profil = ProfilDesa::create([
+            'nama_desa' => 'Desa Sedati Agung',
+            'foto' => 'storage/'.$profilePhoto,
+            'visi' => 'Visi yang tetap tersimpan.',
+        ]);
+        $official = PerangkatDesa::create([
+            'nama' => 'Nama perangkat',
+            'jabatan' => 'Sekretaris Desa',
+            'foto' => 'storage/'.$officialPhoto,
+            'urutan' => 1,
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.profil-desa'))
+            ->assertOk()
+            ->assertSee('name="hapus_foto"', false)
+            ->assertSee('name="perangkat[0][hapus_foto]"', false);
+
+        $this->put(route('admin.profil-desa.update'), [
+            'nama_desa' => 'Desa Sedati Agung',
+            'visi' => 'Visi yang tetap tersimpan.',
+            'hapus_foto' => '1',
+            'perangkat' => [
+                [
+                    'id' => $official->id,
+                    'nama' => $official->nama,
+                    'jabatan' => $official->jabatan,
+                    'hapus_foto' => '1',
+                ],
+            ],
+        ])->assertRedirect(route('admin.profil-desa'));
+
+        $this->assertNull($profil->fresh()->foto);
+        $this->assertSame('Visi yang tetap tersimpan.', $profil->fresh()->visi);
+        $this->assertNull($official->fresh()->foto);
+        Storage::disk('public')->assertMissing($profilePhoto);
+        Storage::disk('public')->assertMissing($officialPhoto);
+    }
 }

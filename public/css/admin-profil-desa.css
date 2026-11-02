@@ -649,3 +649,162 @@ body.admin-profil-desa-page .admin-main {
         width: 100%;
     }
 }
+
+:root[data-admin-theme="dark"] body.admin-profil-desa-page {
+    --profile-blue: #a9d1f6;
+    --profile-blue-soft: #25394e;
+    --profile-orange: #f0ad64;
+    --profile-orange-soft: #403326;
+    --profile-text: #e4ebf4;
+    --profile-muted: #a6b5c5;
+    --profile-line: #394b5e;
+    background: #131c28;
+    color: var(--profile-text);
+}
+
+:root[data-admin-theme="dark"] body.admin-profil-desa-page .admin-sidebar {
+    border-right-color: #304357;
+    background: #1b2c3e;
+}
+
+:root[data-admin-theme="dark"] body.admin-profil-desa-page .admin-brand strong {
+    color: #e0eaf6;
+}
+
+:root[data-admin-theme="dark"] body.admin-profil-desa-page .admin-topbar {
+    border-color: #344456;
+    background: rgba(30, 41, 55, .94);
+}
+
+:root[data-admin-theme="dark"] .site-editor-hero {
+    background: #1b2a3a;
+}
+
+:root[data-admin-theme="dark"] .site-editor-image,
+:root[data-admin-theme="dark"] .site-editor-quote {
+    background: #202f40;
+}
+
+:root[data-admin-theme="dark"] .site-editor-badge {
+    background: #293d52;
+    color: #dce9f7;
+}
+
+:root[data-admin-theme="dark"] .site-editor-section,
+:root[data-admin-theme="dark"] .site-editor-member {
+    border-color: var(--profile-line);
+    background: #1e2937;
+}
+
+:root[data-admin-theme="dark"] .site-editor-card {
+    border-color: var(--profile-line);
+    background: #202f40;
+}
+
+:root[data-admin-theme="dark"] .site-editor-stat {
+    background: #202f40;
+}
+
+:root[data-admin-theme="dark"] .site-editor-stat input {
+    border-bottom-color: #506176;
+    color: #c3def8;
+}
+
+:root[data-admin-theme="dark"] .site-editor-stat input:focus {
+    border-bottom-color: #91c5f3;
+}
+
+:root[data-admin-theme="dark"] .site-editor-member legend {
+    color: #c4def7;
+}
+
+:root[data-admin-theme="dark"] .site-editor-member__remove {
+    color: #ffabb2;
+}
+
+:root[data-admin-theme="dark"] .site-editor-member__remove:hover {
+    background: #38282e;
+}
+
+:root[data-admin-theme="dark"] .site-editor-member.is-marked-for-deletion {
+    background: #35272d;
+}
+
+:root[data-admin-theme="dark"] .site-editor-add-member {
+    border-color: #b87936;
+    background: #202f40;
+    color: #f0ad64;
+}
+
+:root[data-admin-theme="dark"] .site-editor-add-member:hover {
+    background: #403326;
+}
+
+:root[data-admin-theme="dark"] .site-editor-map {
+    background: #202f40;
+}
+
+:root[data-admin-theme="dark"] .village-profile__field input:not([type="file"]),
+:root[data-admin-theme="dark"] .village-profile__field textarea,
+:root[data-admin-theme="dark"] .village-profile__field input[type="file"] {
+    border-color: #40546a;
+    background: #172434;
+    color: #e4ebf4;
+}
+
+:root[data-admin-theme="dark"] .village-profile__field input::placeholder,
+:root[data-admin-theme="dark"] .village-profile__field textarea::placeholder {
+    color: #91a5ba;
+    opacity: 1;
+}
+
+:root[data-admin-theme="dark"] .village-profile__field input[type="file"]::file-selector-button {
+    margin-right: 10px;
+    padding: 5px 8px;
+    border: 1px solid #49627c;
+    border-radius: 6px;
+    background: #293d52;
+    color: #dce7f3;
+    cursor: pointer;
+}
+
+:root[data-admin-theme="dark"] .village-profile__field input:focus,
+:root[data-admin-theme="dark"] .village-profile__field textarea:focus {
+    border-color: #75b8f2;
+    box-shadow: 0 0 0 3px rgba(117, 184, 242, .16);
+}
+
+:root[data-admin-theme="dark"] .village-profile__field input[type="checkbox"] {
+    accent-color: #75b8f2;
+}
+
+:root[data-admin-theme="dark"] .village-profile__current-file a,
+:root[data-admin-theme="dark"] .site-editor-map__link {
+    color: #a9d1f6;
+}
+
+:root[data-admin-theme="dark"] .village-profile__status {
+    border-color: #315f49;
+    background: #1b3629;
+    color: #a1e2b9;
+}
+
+:root[data-admin-theme="dark"] .village-profile__errors {
+    border-color: #70464d;
+    background: #38282e;
+    color: #ffb6bc;
+}
+
+:root[data-admin-theme="dark"] .village-profile__field-error {
+    color: #ff9fa9;
+}
+
+:root[data-admin-theme="dark"] .village-profile__actions {
+    border-color: #394b5e;
+    background: rgba(30, 41, 55, .96);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, .28);
+}
+
+:root[data-admin-theme="dark"] .village-profile__actions button:hover {
+    background: #315778;
+}

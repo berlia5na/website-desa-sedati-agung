@@ -80,12 +80,13 @@
                             <label for="hero_image">Gambar banner</label>
                             <label class="upload-area" for="hero_image">
                                 <span class="upload-area__icon" aria-hidden="true">↑</span>
-                                <span><strong>Pilih gambar banner</strong><small>Format JPG, PNG, atau WebP · Maksimal 5 MB</small></span>
+                                <span><strong>Pilih gambar banner</strong><small>Format JPG, PNG, atau WebP · mengikuti batas unggah server</small></span>
                                 <span class="upload-area__button">Pilih file</span>
                             </label>
                             <input class="visually-hidden" id="hero_image" name="hero_image" type="file" accept="image/*">
                             @if ($halaman->gambar)
                                 <span class="editor-field__hint">Gambar aktif: {{ basename($halaman->gambar) }}. Unggah file baru untuk menggantinya.</span>
+                                <label class="editor-field__hint"><input type="checkbox" name="hapus_gambar_hero" value="1"> Hapus gambar banner saat perubahan disimpan</label>
                             @endif
                             @error('hero_image') <span class="form-error">{{ $message }}</span> @enderror
                         </div>
@@ -143,12 +144,13 @@
                             <label for="sambutan_foto">Foto kepala desa</label>
                             <label class="upload-area" for="sambutan_foto">
                                 <span class="upload-area__icon" aria-hidden="true">↑</span>
-                                <span><strong>Unggah foto kepala desa</strong><small>Format JPG, PNG, atau WebP · Maksimal 5 MB</small></span>
+                                <span><strong>Unggah foto kepala desa</strong><small>Format JPG, PNG, atau WebP · mengikuti batas unggah server</small></span>
                                 <span class="upload-area__button">Pilih file</span>
                             </label>
                             <input class="visually-hidden" id="sambutan_foto" name="sambutan_foto" type="file" accept="image/*">
                             @if ($halaman->sambutan_foto)
                                 <span class="editor-field__hint">Foto aktif: {{ basename($halaman->sambutan_foto) }}. Unggah file baru untuk menggantinya.</span>
+                                <label class="editor-field__hint"><input type="checkbox" name="hapus_foto_sambutan" value="1"> Hapus foto sambutan saat perubahan disimpan</label>
                             @endif
                             @error('sambutan_foto') <span class="form-error">{{ $message }}</span> @enderror
                         </div>

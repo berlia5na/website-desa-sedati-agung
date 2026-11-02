@@ -80,7 +80,7 @@
                         <input type="text" name="caption" maxlength="500" value="{{ old('caption') }}" placeholder="Lokasi atau tanggal">
                     </label>
                     <label class="news-admin-gallery-add-card__file">
-                        <span>Pilih foto <small>JPG, PNG, WebP · maks. 5 MB</small></span>
+                        <span>Pilih foto <small>JPG, PNG, WebP · mengikuti batas unggah server</small></span>
                         <input type="file" name="image" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" required>
                     </label>
                     <button class="admin-button admin-button--primary" type="submit">Tambah ke galeri</button>
