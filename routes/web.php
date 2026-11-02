@@ -17,6 +17,7 @@ Route::controller(LandingPageController::class)->group(function () {
     Route::get('/berita', 'berita')->name('berita');
     Route::get('/berita/{slug}', 'beritaDetail')->name('berita.detail');
     Route::get('/agenda', 'agenda')->name('agenda');
+    Route::get('/agenda/{id}', 'agendaDetail')->whereNumber('id')->name('agenda.detail');
     Route::get('/galeri', 'galeri')->name('galeri');
     Route::get('/kontak', 'kontak')->name('kontak');
 });
@@ -33,6 +34,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::controller(DashboardController::class)->group(function () {
             Route::get('/', 'index')->name('dashboard');
             Route::get('/agenda', 'agenda')->name('agenda');
+            Route::post('/agenda', 'storeAgenda')->name('agenda.store');
+            Route::get('/agenda/{agenda}/edit', 'editAgenda')->name('agenda.edit');
+            Route::put('/agenda/{agenda}', 'updateAgenda')->name('agenda.update');
+            Route::delete('/agenda/{agenda}', 'deleteAgenda')->name('agenda.delete');
             Route::get('/kontak', 'kontak')->name('kontak');
         });
 
