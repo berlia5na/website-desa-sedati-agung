@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\BerandaController;
 use App\Http\Controllers\Dashboard\BeritaController;
 use App\Http\Controllers\Dashboard\BumdesController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\KontakMasukController;
 use App\Http\Controllers\Dashboard\ProfilDesaController;
 use App\Http\Controllers\Landing\PageController as LandingPageController;
 use App\Http\Controllers\ProfilDesaLengkapController;
@@ -20,6 +21,7 @@ Route::controller(LandingPageController::class)->group(function () {
     Route::get('/agenda/{id}', 'agendaDetail')->whereNumber('id')->name('agenda.detail');
     Route::get('/galeri', 'galeri')->name('galeri');
     Route::get('/kontak', 'kontak')->name('kontak');
+    Route::post('/kontak', 'storeKontak')->middleware('throttle:3,1')->name('kontak.store');
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -38,7 +40,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::get('/agenda/{agenda}/edit', 'editAgenda')->name('agenda.edit');
             Route::put('/agenda/{agenda}', 'updateAgenda')->name('agenda.update');
             Route::delete('/agenda/{agenda}', 'deleteAgenda')->name('agenda.delete');
-            Route::get('/kontak', 'kontak')->name('kontak');
+        });
+
+        Route::get('/kontak', [KontakMasukController::class, 'index'])->name('kontak');
+
+        Route::controller(KontakMasukController::class)->prefix('/kontak')->name('kontak.')->group(function () {
+            Route::post('/aksi-massal', 'bulkUpdate')->name('bulk');
+            Route::delete('/aksi-massal', 'bulkDelete')->name('bulk-delete');
+            Route::post('/{kontakMasuk}/buka', 'open')->whereNumber('kontakMasuk')->name('open');
+            Route::post('/{kontakMasuk}/status', 'updateStatus')->whereNumber('kontakMasuk')->name('status');
+            Route::put('/{kontakMasuk}/catatan', 'updateNote')->whereNumber('kontakMasuk')->name('note');
+            Route::delete('/{kontakMasuk}', 'destroy')->whereNumber('kontakMasuk')->name('delete');
         });
 
         Route::controller(BerandaController::class)->group(function () {

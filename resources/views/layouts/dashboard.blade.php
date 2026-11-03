@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Portal Admin | Desa Sedati Agung')</title>
+    @if (request()->routeIs('admin.kontak'))
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;800&family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    @endif
     @if (request()->routeIs('admin.profil-bumdes', 'admin.agenda*'))
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +32,9 @@
     @vite(['resources/css/admin.css', 'resources/css/admin-beranda.css', 'resources/js/admin-beranda.js'])
     @if (request()->routeIs('admin.profil-bumdes'))
         @vite('resources/js/admin-profil-bumdes.js')
+    @endif
+    @if (request()->routeIs('admin.kontak'))
+        @vite(['resources/css/admin-inbox.css', 'resources/js/admin-inbox.js'])
     @endif
     @if (request()->routeIs('admin.agenda*'))
         @vite(['resources/css/agenda.css', 'resources/js/admin-agenda.js'])
@@ -68,7 +76,7 @@
                     <span class="admin-nav__icon" aria-hidden="true">▦</span><span>Agenda Desa</span>
                 </a>
                 <a class="admin-nav__link {{ request()->routeIs('admin.kontak') ? 'is-active' : '' }}" href="{{ route('admin.kontak') }}" data-search-label="kotak masuk kontak">
-                    <span class="admin-nav__icon" aria-hidden="true">✉</span><span>Kotak Masuk &amp; Kontak</span>
+                    <span class="admin-nav__icon" aria-hidden="true">✉</span><span>Kotak Masuk</span>
                 </a>
             </nav>
 
