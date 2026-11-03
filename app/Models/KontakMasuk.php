@@ -10,9 +10,11 @@ class KontakMasuk extends Model
 
     protected $fillable = [
         'nama',
-        'no_telepon',
+        'email',
+        'telepon',
         'subjek',
         'pesan',
         'status',
+        'catatan_admin',
     ];
 }

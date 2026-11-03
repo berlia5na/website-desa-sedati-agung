@@ -2102,3 +2102,64 @@ button {
     background: #1a2837;
     color: #acd0ef;
 }
+
+:root[data-admin-theme="dark"] .news-admin-gallery-add-card,
+:root[data-admin-theme="dark"] .news-editor__upload {
+    border-color: #49627c;
+    background: #202f40;
+}
+
+:root[data-admin-theme="dark"] .news-admin-gallery-add-card > label {
+    color: #dce7f3;
+}
+
+:root[data-admin-theme="dark"] .news-admin__header-form input,
+:root[data-admin-theme="dark"] .news-admin__header-form textarea,
+:root[data-admin-theme="dark"] .news-admin-gallery-add-card input[type="text"],
+:root[data-admin-theme="dark"] .news-admin-gallery-add-card input[type="file"],
+:root[data-admin-theme="dark"] .news-editor__field input,
+:root[data-admin-theme="dark"] .news-editor__field textarea,
+:root[data-admin-theme="dark"] .news-editor__panel select {
+    border-color: #40546a;
+    background: #172434;
+    color: #e4ebf4;
+}
+
+:root[data-admin-theme="dark"] .news-admin__header-form input::placeholder,
+:root[data-admin-theme="dark"] .news-admin__header-form textarea::placeholder,
+:root[data-admin-theme="dark"] .news-admin-gallery-add-card input::placeholder,
+:root[data-admin-theme="dark"] .news-editor__field input::placeholder,
+:root[data-admin-theme="dark"] .news-editor__field textarea::placeholder {
+    color: #91a5ba;
+    opacity: 1;
+}
+
+:root[data-admin-theme="dark"] .news-admin-gallery-add-card input[type="file"]::file-selector-button {
+    margin-right: 10px;
+    padding: 6px 9px;
+    border: 1px solid #49627c;
+    border-radius: 7px;
+    background: #293d52;
+    color: #dce7f3;
+    cursor: pointer;
+}
+
+:root[data-admin-theme="dark"] .news-admin-gallery-card button {
+    border-color: #70464d;
+    background: #38282e;
+    color: #ffb6bc;
+}
+
+:root[data-admin-theme="dark"] .news-admin__status--published {
+    background: #1e3b31;
+    color: #9de0bb;
+}
+
+:root[data-admin-theme="dark"] .news-admin__status--draft {
+    background: #443821;
+    color: #f0cd83;
+}
+
+:root[data-admin-theme="dark"] .news-admin__empty {
+    border-color: #49627c;
+}

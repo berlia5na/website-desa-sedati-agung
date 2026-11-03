@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'nama_desa' => 'Desa Sedati Agung',
         ]);
 
+        $this->call(KontakMasukSeeder::class);
         $this->call(UserSeeder::class);
     }
 }

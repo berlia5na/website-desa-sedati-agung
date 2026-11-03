@@ -7,6 +7,7 @@ use App\Models\Agenda;
 use App\Models\Berita;
 use App\Models\GalleryPhoto;
 use App\Models\HalamanBeranda;
+use App\Models\KontakMasuk;
 use App\Models\NewsPageSetting;
 use App\Models\ProfilBumdes;
 use App\Models\StatistikDesa;
@@ -156,9 +157,60 @@ class PageController extends Controller
         return view('landing.berita-detail', compact('berita', 'beritaTerkait'));
     }
 
-    public function agenda()
+    public function agenda(Request $request): View
     {
-        return view('landing.agenda');
+        $filters = $request->validate([
+            'q' => ['nullable', 'string', 'max:100'],
+        ]);
+        $keyword = trim($filters['q'] ?? '');
+
+        $upcoming = Agenda::query()
+            ->where('status', 'published')
+            ->whereDate('tanggal', '>=', today());
+
+        $spotlight = (clone $upcoming)
+            ->orderBy('tanggal')
+            ->orderBy('waktu_mulai')
+            ->orderBy('id')
+            ->first();
+
+        $agendas = (clone $upcoming)
+            ->when($keyword !== '', function ($query) use ($keyword) {
+                $query->where(function ($search) use ($keyword) {
+                    $search->where('judul', 'like', "%{$keyword}%")
+                        ->orWhere('deskripsi', 'like', "%{$keyword}%")
+                        ->orWhere('kategori', 'like', "%{$keyword}%")
+                        ->orWhere('badge_kategori', 'like', "%{$keyword}%")
+                        ->orWhere('jenis_kegiatan', 'like', "%{$keyword}%")
+                        ->orWhere('lokasi', 'like', "%{$keyword}%")
+                        ->orWhere('penyelenggara', 'like', "%{$keyword}%")
+                        ->orWhere('pic', 'like', "%{$keyword}%");
+                });
+            })
+            ->orderBy('tanggal')
+            ->orderBy('waktu_mulai')
+            ->orderBy('id')
+            ->paginate(6)
+            ->withQueryString();
+
+        return view('landing.agenda', compact('agendas', 'spotlight', 'keyword'));
+    }
+
+    public function agendaDetail(int $id): View
+    {
+        $agenda = Agenda::query()
+            ->where('status', 'published')
+            ->findOrFail($id);
+        $agendasTerkait = Agenda::query()
+            ->where('status', 'published')
+            ->whereDate('tanggal', '>=', today())
+            ->whereKeyNot($agenda->getKey())
+            ->orderBy('tanggal')
+            ->orderBy('waktu_mulai')
+            ->take(3)
+            ->get();
+
+        return view('landing.agenda-detail', compact('agenda', 'agendasTerkait'));
     }
 
     public function galeri()
@@ -179,5 +231,36 @@ class PageController extends Controller
     public function kontak()
     {
         return view('landing.kontak');
+    }
+
+    public function storeKontak(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        if ($request->filled('website')) {
+            return redirect()
+                ->route('kontak')
+                ->with('contact_status', 'Pesan Anda telah diterima. Terima kasih telah menghubungi Pemerintah Desa Sedati Agung.');
+        }
+
+        $validated = $request->validate([
+            'nama' => ['required', 'string', 'max:150'],
+            'email' => ['required', 'email:rfc', 'max:254'],
+            'telepon' => ['nullable', 'string', 'max:30', 'regex:/^[0-9+\s().-]+$/'],
+            'subjek' => ['required', 'in:Informasi layanan desa,Administrasi kependudukan,Pengaduan atau aspirasi,Kerja sama dan lainnya'],
+            'pesan' => ['required', 'string', 'min:10', 'max:5000'],
+            'website' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        KontakMasuk::query()->create([
+            'nama' => $validated['nama'],
+            'email' => $validated['email'],
+            'telepon' => $validated['telepon'] ?? null,
+            'subjek' => $validated['subjek'],
+            'pesan' => $validated['pesan'],
+            'status' => 'baru',
+        ]);
+
+        return redirect()
+            ->route('kontak')
+            ->with('contact_status', 'Pesan Anda berhasil dikirim. Kami akan membalas dalam 1×24 jam kerja.');
     }
 }

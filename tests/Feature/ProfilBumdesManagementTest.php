@@ -351,4 +351,64 @@ class ProfilBumdesManagementTest extends TestCase
 
         $this->assertNull($profil->fresh()->pengurus);
     }
+
+    public function test_admin_can_remove_bumdes_and_related_photos_while_retaining_content(): void
+    {
+        Storage::fake('public');
+        $admin = User::factory()->create();
+        $bumdesPhoto = UploadedFile::fake()->image('bumdes.jpg')->store('profil-bumdes', 'public');
+        $managerPhoto = UploadedFile::fake()->image('pengurus.jpg')->store('pengurus-bumdes', 'public');
+        $unitPhoto = UploadedFile::fake()->image('unit.jpg')->store('unit-bumdes', 'public');
+        $profil = ProfilBumdes::create([
+            'nama_bumdes' => 'BUMDes Sedati Agung',
+            'foto' => $bumdesPhoto,
+            'deskripsi' => 'Deskripsi yang tetap dipertahankan.',
+            'pengurus' => [
+                ['nama' => 'Ibu Siti', 'jabatan' => 'Direktur', 'deskripsi' => 'Pengurus tetap.', 'foto' => $managerPhoto],
+            ],
+        ]);
+        $unit = $profil->unitBumdes()->create([
+            'nama_unit' => 'Unit Pertanian',
+            'jenis' => 'Pertanian',
+            'gambar' => $unitPhoto,
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.profil-bumdes'))
+            ->assertOk()
+            ->assertSee('name="hapus_foto"', false)
+            ->assertSee('name="pengurus[0][hapus_foto]"', false)
+            ->assertSee('name="unit[0][hapus_gambar]"', false);
+
+        $this->put(route('admin.profil-bumdes.update'), [
+            'nama_bumdes' => 'BUMDes Sedati Agung',
+            'hapus_foto' => '1',
+            'deskripsi' => 'Deskripsi yang tetap dipertahankan.',
+            'pengurus' => [
+                [
+                    'nama' => 'Ibu Siti',
+                    'jabatan' => 'Direktur',
+                    'deskripsi' => 'Pengurus tetap.',
+                    'foto_tersimpan' => $managerPhoto,
+                    'hapus_foto' => '1',
+                ],
+            ],
+            'unit' => [
+                [
+                    'id' => $unit->id,
+                    'nama_unit' => 'Unit Pertanian',
+                    'jenis' => 'Pertanian',
+                    'hapus_gambar' => '1',
+                ],
+            ],
+        ])->assertRedirect(route('admin.profil-bumdes'));
+
+        $this->assertNull($profil->fresh()->foto);
+        $this->assertSame('Deskripsi yang tetap dipertahankan.', $profil->fresh()->deskripsi);
+        $this->assertNull($profil->fresh()->pengurus[0]['foto']);
+        $this->assertNull($unit->fresh()->gambar);
+        Storage::disk('public')->assertMissing($bumdesPhoto);
+        Storage::disk('public')->assertMissing($managerPhoto);
+        Storage::disk('public')->assertMissing($unitPhoto);
+    }
 }

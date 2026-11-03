@@ -6,6 +6,7 @@ use App\Models\Berita;
 use App\Models\GalleryPhoto;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -35,6 +36,25 @@ class NewsPublishingTest extends TestCase
             ->assertSee($article->judul)
             ->assertSee('Warga dari tiga dusun ikut serta.')
             ->assertSee('Kembali ke semua berita');
+    }
+
+    public function test_uploaded_news_images_use_a_host_relative_storage_url(): void
+    {
+        Storage::fake('public');
+        $author = User::factory()->create();
+        $imagePath = UploadedFile::fake()->image('gotong-royong.jpg')->store('berita', 'public');
+        Berita::query()->create([
+            'user_id' => $author->id,
+            'judul' => 'Foto Kegiatan Desa',
+            'slug' => 'foto-kegiatan-desa',
+            'isi' => 'Dokumentasi kegiatan warga.',
+            'gambar' => $imagePath,
+            'status' => 'published',
+        ]);
+
+        $this->get('http://127.0.0.1:8000/berita')
+            ->assertOk()
+            ->assertSee('src="/storage/'.$imagePath.'"', false);
     }
 
     public function test_draft_news_is_not_available_on_public_detail_pages(): void
@@ -122,6 +142,27 @@ class NewsPublishingTest extends TestCase
             ->assertSee('Tambah foto');
     }
 
+    public function test_admin_can_upload_news_image_larger_than_five_megabytes(): void
+    {
+        Storage::fake('public');
+        $admin = User::factory()->create();
+        $largePhoto = UploadedFile::fake()->image('foto-besar.jpg')->size(6000);
+
+        $this->actingAs($admin)
+            ->post(route('admin.berita.store'), [
+                'judul' => 'Dokumentasi Foto Besar',
+                'kategori' => 'Acara Desa',
+                'isi' => 'Berita dengan foto berukuran lebih dari lima megabyte.',
+                'status' => 'published',
+                'gambar' => $largePhoto,
+            ])
+            ->assertRedirect(route('admin.berita'))
+            ->assertSessionHasNoErrors();
+
+        $article = Berita::query()->where('judul', 'Dokumentasi Foto Besar')->firstOrFail();
+        Storage::disk('public')->assertExists($article->gambar);
+    }
+
     public function test_admin_can_edit_and_remove_a_news_article(): void
     {
         $admin = User::factory()->create();
@@ -206,5 +247,41 @@ class NewsPublishingTest extends TestCase
 
         $this->assertDatabaseMissing('gallery_photos', ['id' => $photo->id]);
         Storage::disk('public')->assertMissing('galeri-kegiatan/kerja-bakti.jpg');
+    }
+
+    public function test_admin_can_remove_a_news_photo_without_deleting_the_news(): void
+    {
+        Storage::fake('public');
+        Storage::disk('public')->put('berita/kegiatan.jpg', 'news-image');
+        $admin = User::factory()->create();
+        $article = Berita::query()->create([
+            'user_id' => $admin->id,
+            'judul' => 'Kegiatan Desa',
+            'slug' => 'kegiatan-desa',
+            'kategori' => 'Acara Desa',
+            'isi' => 'Isi berita tetap ada.',
+            'gambar' => 'berita/kegiatan.jpg',
+            'status' => 'published',
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.berita.edit', $article))
+            ->assertOk()
+            ->assertSee('name="hapus_gambar"', false);
+
+        $this->put(route('admin.berita.update', $article), [
+            'judul' => $article->judul,
+            'kategori' => $article->kategori,
+            'isi' => $article->isi,
+            'status' => $article->status,
+            'hapus_gambar' => '1',
+        ])->assertRedirect(route('admin.berita'));
+
+        $this->assertDatabaseHas('berita', [
+            'id' => $article->id,
+            'gambar' => null,
+            'isi' => 'Isi berita tetap ada.',
+        ]);
+        Storage::disk('public')->assertMissing('berita/kegiatan.jpg');
     }
 }

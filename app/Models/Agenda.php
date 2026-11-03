@@ -18,6 +18,8 @@ class Agenda extends Model
         'waktu_selesai',
         'sesi',
         'kategori',
+        'jenis_kegiatan',
+        'jenis_undangan',
         'badge_kategori',
         'lokasi',
         'penyelenggara',

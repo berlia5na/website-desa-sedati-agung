@@ -90,6 +90,9 @@
                     <div class="village-profile__field">
                         <label for="foto">Unggah foto utama</label>
                         <input id="foto" name="foto" type="file" accept="image/*">
+                        @if ($profil->foto)
+                            <label class="village-profile__hint"><input type="checkbox" name="hapus_foto" value="1" @checked(old('hapus_foto'))> Hapus foto utama saat disimpan</label>
+                        @endif
                         @error('foto') <span class="village-profile__field-error">{{ $message }}</span> @enderror
                     </div>
                     <div class="village-profile__field">
@@ -237,6 +240,7 @@
                                     <input id="perangkat-{{ $index }}-foto" name="perangkat[{{ $index }}][foto]" type="file" accept="image/*">
                                     @if ($anggota->foto)
                                         <span class="village-profile__current-file"><a href="{{ asset($anggota->foto) }}" target="_blank" rel="noopener">Foto tersimpan</a></span>
+                                        <label class="village-profile__hint"><input type="checkbox" name="perangkat[{{ $index }}][hapus_foto]" value="1" @checked(old("perangkat.$index.hapus_foto"))> Hapus foto perangkat saat disimpan</label>
                                     @endif
                                     @error("perangkat.{$index}.foto") <span class="village-profile__field-error">{{ $message }}</span> @enderror
                                 </div>

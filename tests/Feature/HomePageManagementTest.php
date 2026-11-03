@@ -158,6 +158,49 @@ class HomePageManagementTest extends TestCase
             ->assertDontSee('Teks sambutan untuk dihapus.');
     }
 
+    public function test_admin_can_remove_homepage_photos_without_deleting_the_greeting_text(): void
+    {
+        Storage::fake('public');
+        Storage::disk('public')->put('halaman-beranda/banner.jpg', 'banner-image');
+        Storage::disk('public')->put('halaman-beranda/sambutan.jpg', 'welcome-image');
+        $admin = User::factory()->create();
+        HalamanBeranda::create([
+            'judul' => 'Beranda Desa',
+            'status' => 'published',
+            'gambar' => 'halaman-beranda/banner.jpg',
+            'sambutan_nama' => 'Nama Kepala Desa',
+            'sambutan_jabatan' => 'Kepala Desa',
+            'sambutan_teks' => 'Sambutan yang tetap dipertahankan.',
+            'sambutan_foto' => 'halaman-beranda/sambutan.jpg',
+            'sambutan_tampil' => true,
+        ]);
+
+        $this->actingAs($admin)
+            ->get(route('admin.beranda'))
+            ->assertOk()
+            ->assertSee('name="hapus_gambar_hero"', false)
+            ->assertSee('name="hapus_foto_sambutan"', false);
+
+        $this->actingAs($admin)
+            ->put(route('admin.beranda.update'), [
+                'jumlah_usaha_bumdes' => 4,
+                'sambutan_nama' => 'Nama Kepala Desa',
+                'sambutan_jabatan' => 'Kepala Desa',
+                'sambutan_teks' => 'Sambutan yang tetap dipertahankan.',
+                'sambutan_tampil' => '1',
+                'hapus_gambar_hero' => '1',
+                'hapus_foto_sambutan' => '1',
+            ])
+            ->assertRedirect(route('admin.beranda'));
+
+        $halaman = HalamanBeranda::query()->firstOrFail();
+        $this->assertNull($halaman->gambar);
+        $this->assertNull($halaman->sambutan_foto);
+        $this->assertSame('Sambutan yang tetap dipertahankan.', $halaman->sambutan_teks);
+        Storage::disk('public')->assertMissing('halaman-beranda/banner.jpg');
+        Storage::disk('public')->assertMissing('halaman-beranda/sambutan.jpg');
+    }
+
     public function test_guests_cannot_access_or_publish_home_page_content(): void
     {
         $this->get(route('admin.beranda'))

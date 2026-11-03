@@ -60,6 +60,8 @@ Portal admin tersedia di `/admin/login` dan hanya menerima username serta kata s
 
 Login memakai akun admin yang sudah tersimpan di database; variabel `ADMIN_USERNAME` dan `ADMIN_PASSWORD` tidak dibaca saat proses login. Untuk mengatur atau memulihkan kredensial admin tanpa menyimpan kata sandi di `.env`, jalankan `php artisan admin:reset-login`, lalu masukkan nama pengguna dan kata sandi baru pada prompt terminal. Kata sandi tidak ditampilkan dan wajib minimal 12 karakter.
 
+Menu **Agenda Desa** di portal admin menyediakan pembuatan, pencarian, pengeditan, dan penghapusan agenda. Agenda yang berstatus publikasi dan bertanggal hari ini atau mendatang muncul di `/agenda`, dengan agenda terdekat sebagai sorotan; agenda draft dan kegiatan lampau tidak ditampilkan dalam daftar publik. Daftar agenda dapat dicari melalui parameter `?q=...`, dan detail publik tersedia di `/agenda/{id}`. Setelah memperbarui proyek, jalankan `php artisan migrate` untuk menambahkan kolom jenis kegiatan dan jenis undangan.
+
 Untuk membuat atau memperbarui akun admin saat seeding, isi `ADMIN_USERNAME` dan `ADMIN_PASSWORD` di `.env` lokal, kemudian jalankan `php artisan db:seed --class="Database\\Seeders\\UserSeeder"`. Jangan menyimpan kredensial di source code atau mengirim file `.env` ke GitHub. Kata sandi otomatis di-hash oleh model.
 
 Masuk melalui `/admin/login`; keluar melalui tombol **Keluar** pada portal admin.

@@ -99,7 +99,10 @@
                             @endif
                         </div>
                         <input id="foto" name="foto" type="file" accept="image/*">
-                        <small class="bumdes-editor__hint">Pilih foto kegiatan atau suasana BUMDes. JPG, PNG, atau WebP; maksimal 5 MB.</small>
+                        @if ($profil->foto)
+                            <label class="bumdes-editor__hint"><input type="checkbox" name="hapus_foto" value="1" @checked(old('hapus_foto'))> Hapus foto BUMDes saat disimpan</label>
+                        @endif
+                        <small class="bumdes-editor__hint">Pilih foto kegiatan atau suasana BUMDes. JPG, PNG, atau WebP; ukuran mengikuti batas unggah server.</small>
                         @error('foto') <small class="form-error">{{ $message }}</small> @enderror
                         <div class="bumdes-editor__metrics">
                             <strong>Ringkasan unit usaha</strong>

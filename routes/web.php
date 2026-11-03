@@ -1,7 +1,12 @@
 <?php
 
 use App\Http\Controllers\Auth\AdminLoginController;
-use App\Http\Controllers\Dashboard\PageController as DashboardPageController;
+use App\Http\Controllers\Dashboard\BerandaController;
+use App\Http\Controllers\Dashboard\BeritaController;
+use App\Http\Controllers\Dashboard\BumdesController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\KontakMasukController;
+use App\Http\Controllers\Dashboard\ProfilDesaController;
 use App\Http\Controllers\Landing\PageController as LandingPageController;
 use App\Http\Controllers\ProfilDesaLengkapController;
 use Illuminate\Support\Facades\Route;
@@ -13,8 +18,10 @@ Route::controller(LandingPageController::class)->group(function () {
     Route::get('/berita', 'berita')->name('berita');
     Route::get('/berita/{slug}', 'beritaDetail')->name('berita.detail');
     Route::get('/agenda', 'agenda')->name('agenda');
+    Route::get('/agenda/{id}', 'agendaDetail')->whereNumber('id')->name('agenda.detail');
     Route::get('/galeri', 'galeri')->name('galeri');
     Route::get('/kontak', 'kontak')->name('kontak');
+    Route::post('/kontak', 'storeKontak')->middleware('throttle:3,1')->name('kontak.store');
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -26,14 +33,39 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/logout', [AdminLoginController::class, 'destroy'])->name('logout');
 
-        Route::controller(DashboardPageController::class)->group(function () {
+        Route::controller(DashboardController::class)->group(function () {
             Route::get('/', 'index')->name('dashboard');
+            Route::get('/agenda', 'agenda')->name('agenda');
+            Route::post('/agenda', 'storeAgenda')->name('agenda.store');
+            Route::get('/agenda/{agenda}/edit', 'editAgenda')->name('agenda.edit');
+            Route::put('/agenda/{agenda}', 'updateAgenda')->name('agenda.update');
+            Route::delete('/agenda/{agenda}', 'deleteAgenda')->name('agenda.delete');
+        });
+
+        Route::get('/kontak', [KontakMasukController::class, 'index'])->name('kontak');
+
+        Route::controller(KontakMasukController::class)->prefix('/kontak')->name('kontak.')->group(function () {
+            Route::post('/aksi-massal', 'bulkUpdate')->name('bulk');
+            Route::delete('/aksi-massal', 'bulkDelete')->name('bulk-delete');
+            Route::post('/{kontakMasuk}/buka', 'open')->whereNumber('kontakMasuk')->name('open');
+            Route::post('/{kontakMasuk}/status', 'updateStatus')->whereNumber('kontakMasuk')->name('status');
+            Route::put('/{kontakMasuk}/catatan', 'updateNote')->whereNumber('kontakMasuk')->name('note');
+            Route::delete('/{kontakMasuk}', 'destroy')->whereNumber('kontakMasuk')->name('delete');
+        });
+
+        Route::controller(BerandaController::class)->group(function () {
             Route::get('/beranda', 'beranda')->name('beranda');
             Route::put('/beranda', 'updateBeranda')->name('beranda.update');
             Route::delete('/beranda/sambutan', 'deleteSambutan')->name('beranda.sambutan.delete');
             Route::put('/beranda/statistik', 'updateStatistik')->name('beranda.statistik.update');
+        });
+
+        Route::controller(ProfilDesaController::class)->group(function () {
             Route::get('/profil-desa', 'profilDesa')->name('profil-desa');
             Route::put('/profil-desa', 'updateProfilDesa')->name('profil-desa.update');
+        });
+
+        Route::controller(BeritaController::class)->group(function () {
             Route::get('/berita', 'berita')->name('berita');
             Route::put('/berita/header', 'updateBeritaHeader')->name('berita.header.update');
             Route::get('/berita/tulis', 'createBerita')->name('berita.create');
@@ -43,10 +75,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
             Route::delete('/berita/{berita}', 'deleteBerita')->name('berita.delete');
             Route::post('/galeri', 'storeGalleryPhoto')->name('galeri.store');
             Route::delete('/galeri/{galleryPhoto}', 'deleteGalleryPhoto')->name('galeri.delete');
+        });
+
+        Route::controller(BumdesController::class)->group(function () {
             Route::get('/profil-bumdes', 'profilBumdes')->name('profil-bumdes');
             Route::put('/profil-bumdes', 'updateProfilBumdes')->name('profil-bumdes.update');
-            Route::get('/agenda', 'agenda')->name('agenda');
-            Route::get('/kontak', 'kontak')->name('kontak');
         });
     });
 });
