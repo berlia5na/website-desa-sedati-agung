@@ -61,11 +61,6 @@ class PageController extends Controller
         ));
     }
 
-    public function profilDesa()
-    {
-        return view('landing.profil-desa');
-    }
-
     public function profilBumdes()
     {
         $profilBumdes = ProfilBumdes::query()

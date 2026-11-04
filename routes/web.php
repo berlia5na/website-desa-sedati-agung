@@ -9,9 +9,10 @@ use App\Http\Controllers\Dashboard\KontakMasukController;
 use App\Http\Controllers\Dashboard\ProfilDesaController;
 use App\Http\Controllers\Landing\PageController as LandingPageController;
 use App\Http\Controllers\ProfilDesaLengkapController;
+use App\Http\Middleware\TrackPublicVisitor;
 use Illuminate\Support\Facades\Route;
 
-Route::controller(LandingPageController::class)->group(function () {
+Route::middleware(TrackPublicVisitor::class)->controller(LandingPageController::class)->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('/profil-desa', 'profilDesa')->name('profil-desa');
     Route::get('/profil-bumdes', 'profilBumdes')->name('profil-bumdes');
@@ -85,4 +86,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::get('/profil-desa', [ProfilDesaLengkapController::class, 'index'])
+    ->middleware(TrackPublicVisitor::class)
     ->name('profil-desa');

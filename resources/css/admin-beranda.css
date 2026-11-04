@@ -16,7 +16,7 @@
     gap: 8px;
     margin-bottom: 12px;
     color: #98a5b4;
-    font-size: 10px;
+    font-size: 10.8px;
     font-weight: 600;
 }
 
@@ -47,7 +47,7 @@
 .home-editor__heading p {
     margin: 8px 0 0;
     color: #7c8998;
-    font-size: 12px;
+    font-size: 13.0px;
 }
 
 .home-editor__actions {
@@ -66,7 +66,7 @@
     padding: 0 14px;
     border: 1px solid transparent;
     border-radius: 7px;
-    font-size: 11px;
+    font-size: 11.9px;
     font-weight: 700;
     transition: background .16s ease, box-shadow .16s ease, transform .16s ease;
 }
@@ -116,7 +116,7 @@
     padding: 12px 15px;
     border: 1px solid;
     border-radius: 8px;
-    font-size: 12px;
+    font-size: 13.0px;
 }
 
 .admin-alert--success {
@@ -181,7 +181,7 @@
     border: 0;
     background: transparent;
     color: #8390a0;
-    font-size: 10px;
+    font-size: 10.8px;
     font-weight: 650;
     white-space: nowrap;
 }
@@ -229,13 +229,13 @@
     border-radius: 9px;
     background: #eaf3ff;
     color: #3979b5;
-    font-size: 17px;
+    font-size: 18.4px;
 }
 
 .editor-panel__heading h2 {
     margin: 1px 0 5px;
     color: #263b50;
-    font-size: 15px;
+    font-size: 16.2px;
     font-weight: 720;
 }
 
@@ -243,7 +243,7 @@
 .editor-subsection p {
     margin: 0;
     color: #8290a0;
-    font-size: 10px;
+    font-size: 10.8px;
     line-height: 1.65;
 }
 
@@ -267,14 +267,14 @@
 .editor-field > label,
 .statistic-edit-card > label {
     color: #3a4e63;
-    font-size: 10px;
+    font-size: 10.8px;
     font-weight: 700;
 }
 
 .field-required {
     margin-left: 5px;
     color: #a1adba;
-    font-size: 9px;
+    font-size: 9.7px;
     font-weight: 500;
 }
 
@@ -289,7 +289,7 @@
     outline: none;
     background: #fff;
     color: #33465a;
-    font-size: 11px;
+    font-size: 11.9px;
     line-height: 1.55;
     transition: border-color .15s ease, box-shadow .15s ease;
 }
@@ -313,7 +313,7 @@
 
 .editor-field__hint {
     color: #8a97a6;
-    font-size: 9px;
+    font-size: 9.7px;
     line-height: 1.55;
 }
 
@@ -354,7 +354,7 @@
     border-radius: 8px;
     background: #e6f0fb;
     color: #477eaf;
-    font-size: 20px;
+    font-size: 21.6px;
 }
 
 .upload-area > span:nth-child(2) {
@@ -364,12 +364,12 @@
 
 .upload-area strong {
     color: #446481;
-    font-size: 10px;
+    font-size: 10.8px;
 }
 
 .upload-area small {
     color: #8b99a8;
-    font-size: 9px;
+    font-size: 9.7px;
 }
 
 .upload-area__button {
@@ -379,7 +379,7 @@
     border-radius: 5px;
     background: #fff;
     color: #56728e;
-    font-size: 9px;
+    font-size: 9.7px;
     font-weight: 650;
 }
 
@@ -431,14 +431,14 @@
     outline: 0;
     background: transparent;
     color: #32495f;
-    font-size: 12px;
+    font-size: 13.0px;
     font-weight: 650;
 }
 
 .statistic-edit-card__input span {
     padding-right: 9px;
     color: #95a1ae;
-    font-size: 9px;
+    font-size: 9.7px;
     white-space: nowrap;
 }
 
@@ -451,7 +451,7 @@
     border-radius: 6px;
     background: #f3f8fd;
     color: #6a8298;
-    font-size: 10px;
+    font-size: 10.8px;
     line-height: 1.6;
 }
 
@@ -464,8 +464,89 @@
     border-radius: 50%;
     background: #dfeefa;
     color: #3d79aa;
-    font-size: 10px;
+    font-size: 10.8px;
     font-weight: 800;
+}
+
+.budget-editor__columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0 0 -7px;
+    color: #74869a;
+    font-size: 11px;
+    font-weight: 750;
+    text-align: center;
+}
+
+.budget-editor__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.budget-editor__label {
+    color: #3a4e63;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.budget-editor__amount {
+    display: grid;
+    min-width: 0;
+    gap: 6px;
+    color: #73869a;
+    font-size: 10px;
+    font-weight: 650;
+}
+
+.budget-editor__input-prefix {
+    display: flex;
+    min-width: 0;
+    min-height: 38px;
+    align-items: center;
+    gap: 7px;
+    padding-left: 10px;
+    border: 1px solid #dfe5ec;
+    border-radius: 6px;
+    background: #fff;
+    color: #718196;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.budget-editor__input-prefix input {
+    width: 100%;
+    min-width: 0;
+    height: 36px;
+    padding: 0 8px 0 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    color: #33465a;
+    font: inherit;
+    font-size: 12px;
+}
+
+.budget-editor__input-prefix:focus-within {
+    border-color: #75a7d7;
+    box-shadow: 0 0 0 3px rgba(55, 127, 192, .1);
+}
+
+:root[data-admin-theme="dark"] .budget-editor__label,
+:root[data-admin-theme="dark"] .budget-editor__amount,
+:root[data-admin-theme="dark"] .budget-editor__columns {
+    color: #aab8c7;
+}
+
+:root[data-admin-theme="dark"] .budget-editor__input-prefix {
+    border-color: #405267;
+    background: #1b2836;
+    color: #aab8c7;
+}
+
+:root[data-admin-theme="dark"] .budget-editor__input-prefix input {
+    color: #dce7f3;
 }
 
 .admin-switch {
@@ -528,12 +609,12 @@
 
 .admin-switch strong {
     color: #42566b;
-    font-size: 10px;
+    font-size: 10.8px;
 }
 
 .admin-switch small {
     color: #8a98a8;
-    font-size: 9px;
+    font-size: 9.7px;
     line-height: 1.5;
 }
 
@@ -544,7 +625,7 @@
 .editor-subsection h3 {
     margin: 0 0 5px;
     color: #40556a;
-    font-size: 12px;
+    font-size: 13.0px;
 }
 
 .editor-subsection--separated {
@@ -564,7 +645,7 @@
 
 .editor-field select optgroup {
     color: #73869a;
-    font-size: 10px;
+    font-size: 10.8px;
     font-weight: 700;
 }
 
@@ -584,7 +665,7 @@
     align-items: center;
     gap: 8px;
     color: #8290a0;
-    font-size: 9px;
+    font-size: 9.7px;
 }
 
 .publication-dot,
@@ -636,7 +717,7 @@
 
 .preview-card__heading strong {
     color: #445a70;
-    font-size: 10px;
+    font-size: 10.8px;
 }
 
 .preview-live-dot {
@@ -646,7 +727,7 @@
 
 .preview-card__external {
     color: #93a2b1;
-    font-size: 13px;
+    font-size: 14.0px;
 }
 
 .preview-browser {
@@ -680,7 +761,7 @@
     border-radius: 4px;
     background: #fff;
     color: #a2adba;
-    font-size: 7px;
+    font-size: 7.6px;
     text-align: center;
 }
 
@@ -692,7 +773,7 @@
     padding: 0 8px;
     overflow: hidden;
     color: #687b8e;
-    font-size: 6px;
+    font-size: 6.5px;
     white-space: nowrap;
 }
 
@@ -704,13 +785,13 @@
     border-radius: 50%;
     background: #3976a8;
     color: #fff;
-    font-size: 6px;
+    font-size: 6.5px;
 }
 
 .preview-site__nav > span:last-child {
     margin-left: auto;
     color: #99a5b2;
-    font-size: 5px;
+    font-size: 5.4px;
 }
 
 .preview-site__hero {
@@ -746,7 +827,7 @@
 
 .preview-site__hero > span {
     color: #f4c66e;
-    font-size: 6px;
+    font-size: 6.5px;
     font-weight: 800;
     letter-spacing: .08em;
 }
@@ -754,7 +835,7 @@
 .preview-site__hero > strong {
     max-width: 210px;
     font-family: Georgia, serif;
-    font-size: 16px;
+    font-size: 17.3px;
     line-height: 1.12;
 }
 
@@ -763,7 +844,7 @@
     max-width: 200px;
     overflow: hidden;
     color: rgba(255, 255, 255, .78);
-    font-size: 7px;
+    font-size: 7.6px;
     line-height: 1.45;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -774,7 +855,7 @@
     border-radius: 4px;
     background: #efa928;
     color: #173858;
-    font-size: 6px;
+    font-size: 6.5px;
     font-style: normal;
     font-weight: 800;
 }
@@ -799,12 +880,12 @@
 .preview-site__stats b {
     color: #22577e;
     font-family: Georgia, serif;
-    font-size: 12px;
+    font-size: 13.0px;
 }
 
 .preview-site__stats small {
     color: #8c9aaa;
-    font-size: 5px;
+    font-size: 5.4px;
 }
 
 .preview-site__welcome {
@@ -831,7 +912,7 @@
     border-radius: 6px;
     background: #d8e9f4;
     color: #41749a;
-    font-size: 8px;
+    font-size: 8.6px;
     font-weight: 800;
 }
 
@@ -850,7 +931,7 @@
 .preview-site__welcome b {
     overflow: hidden;
     color: #425971;
-    font-size: 7px;
+    font-size: 7.6px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -859,7 +940,7 @@
     display: -webkit-box;
     overflow: hidden;
     color: #8a98a7;
-    font-size: 6px;
+    font-size: 6.5px;
     line-height: 1.4;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
@@ -879,7 +960,7 @@
     border-radius: 4px;
     background: #f5f8fb;
     color: #6e8092;
-    font-size: 6px;
+    font-size: 6.5px;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -898,32 +979,32 @@
 
 .preview-site__widget b {
     color: #365d80;
-    font-size: 7px;
+    font-size: 7.6px;
 }
 
 .preview-site__widget small {
     color: #758aa0;
-    font-size: 6px;
+    font-size: 6.5px;
     line-height: 1.4;
 }
 
 .preview-caption {
     margin: 9px 0 0;
     color: #98a3b0;
-    font-size: 8px;
+    font-size: 8.6px;
     line-height: 1.5;
 }
 
 .aside-section__heading h2 {
     margin: 0;
     color: #455a70;
-    font-size: 11px;
+    font-size: 11.9px;
     font-weight: 720;
 }
 
 .aside-section__heading > span {
     color: #8295a8;
-    font-size: 10px;
+    font-size: 10.8px;
     font-weight: 700;
 }
 
@@ -955,7 +1036,7 @@
     align-items: center;
     gap: 8px;
     color: #738397;
-    font-size: 9px;
+    font-size: 9.7px;
 }
 
 .completion-check {
@@ -967,7 +1048,7 @@
     border: 1px solid #d7dfe7;
     border-radius: 50%;
     color: #acb7c2;
-    font-size: 9px;
+    font-size: 9.7px;
 }
 
 .completion-check.is-complete {
@@ -991,7 +1072,7 @@
     border-radius: 7px;
     background: #eaf3ff;
     color: #397ab4;
-    font-size: 13px;
+    font-size: 14.0px;
 }
 
 .history-entry > span:last-child {
@@ -1001,19 +1082,19 @@
 
 .history-entry strong {
     color: #50667d;
-    font-size: 9px;
+    font-size: 9.7px;
 }
 
 .history-entry small,
 .history-empty {
     color: #8b98a6;
-    font-size: 8px;
+    font-size: 8.6px;
     line-height: 1.5;
 }
 
 .history-empty {
     margin: 12px 0 0;
-    font-size: 9px;
+    font-size: 9.7px;
 }
 
 @media (max-width: 1190px) {
@@ -1061,7 +1142,7 @@
         flex: 1;
         min-height: 41px;
         padding-inline: 8px;
-        font-size: 9px;
+        font-size: 9.7px;
     }
 
     .home-editor__aside {
@@ -1082,7 +1163,7 @@
 
     .admin-tab {
         padding-inline: 9px;
-        font-size: 9px;
+        font-size: 9.7px;
     }
 
     .editor-fields {

@@ -95,6 +95,61 @@ class HomePageManagementTest extends TestCase
             ->assertDontSee('Berita Terkini');
     }
 
+    public function test_admin_can_publish_budget_transparency_for_the_public_home_page(): void
+    {
+        $admin = User::factory()->create();
+
+        $this->actingAs($admin)
+            ->get(route('admin.beranda'))
+            ->assertOk()
+            ->assertSee('Transparansi Anggaran')
+            ->assertSee('name="anggaran_pendapatan"', false)
+            ->assertSee('name="realisasi_belanja"', false);
+
+        $this->put(route('admin.beranda.update'), [
+            'jumlah_usaha_bumdes' => 4,
+            'anggaran_tahun' => 2026,
+            'anggaran_pendapatan' => 1500000000,
+            'realisasi_pendapatan' => 1200000000,
+            'anggaran_belanja' => 1400000000,
+            'realisasi_belanja' => 950000000,
+            'anggaran_pembiayaan' => 100000000,
+            'realisasi_pembiayaan' => 50000000,
+            'anggaran_keterangan' => 'Realisasi sampai dengan semester pertama.',
+            'anggaran_dokumen_url' => 'https://example.test/apbdes-2026.pdf',
+        ])
+            ->assertRedirect(route('admin.beranda'));
+
+        $this->assertDatabaseHas('halaman_beranda', [
+            'anggaran_tahun' => 2026,
+            'anggaran_pendapatan' => 1500000000,
+            'realisasi_belanja' => 950000000,
+            'anggaran_keterangan' => 'Realisasi sampai dengan semester pertama.',
+            'anggaran_dokumen_url' => 'https://example.test/apbdes-2026.pdf',
+        ]);
+
+        $this->get(route('home'))
+            ->assertOk()
+            ->assertSee('Transparansi Anggaran Desa')
+            ->assertSee('Tahun Anggaran 2026')
+            ->assertSee('Rp 1.500.000.000')
+            ->assertSee('Rp 950.000.000')
+            ->assertSee('Realisasi sampai dengan semester pertama.')
+            ->assertSee('https://example.test/apbdes-2026.pdf');
+    }
+
+    public function test_budget_document_link_only_accepts_local_paths_or_http_urls(): void
+    {
+        $this->actingAs(User::factory()->create())
+            ->from(route('admin.beranda'))
+            ->put(route('admin.beranda.update'), [
+                'jumlah_usaha_bumdes' => 4,
+                'anggaran_dokumen_url' => 'javascript:alert(1)',
+            ])
+            ->assertRedirect(route('admin.beranda'))
+            ->assertSessionHasErrors('anggaran_dokumen_url');
+    }
+
     public function test_admin_can_upload_banner_and_welcome_images(): void
     {
         Storage::fake('public');

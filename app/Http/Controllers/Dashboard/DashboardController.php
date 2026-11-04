@@ -4,15 +4,52 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Agenda;
-use Illuminate\Http\Request;
+use App\Models\Berita;
+use App\Models\KontakMasuk;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(): View
     {
-        return view('dashboard.index');
+        $today = today();
+        $weekStart = $today->copy()->subDays(6)->toDateString();
+        $todayDate = $today->toDateString();
+        $dailyVisitorCounts = DB::table('visitor_visits')
+            ->whereBetween('visit_date', [$weekStart, $todayDate])
+            ->select('visit_date')
+            ->selectRaw('COUNT(*) as total')
+            ->groupBy('visit_date')
+            ->pluck('total', 'visit_date');
+        $visitorDays = collect(range(6, 0))->map(function (int $daysAgo) use ($dailyVisitorCounts) {
+            $date = today()->subDays($daysAgo);
+
+            return [
+                'label' => $date->format('d/m'),
+                'date' => $date->toDateString(),
+                'total' => (int) $dailyVisitorCounts->get($date->toDateString(), 0),
+            ];
+        });
+
+        return view('dashboard.index', [
+            'totalVisitors' => DB::table('visitor_visits')->distinct()->count('visitor_hash'),
+            'todayVisitors' => (int) $dailyVisitorCounts->get($todayDate, 0),
+            'weekVisitors' => (int) $dailyVisitorCounts->sum(),
+            'visitorDays' => $visitorDays,
+            'publishedNewsCount' => Berita::query()->where('status', 'published')->count(),
+            'upcomingAgendaCount' => Agenda::query()
+                ->where('status', 'published')
+                ->whereDate('tanggal', '>=', $todayDate)
+                ->count(),
+            'newContactCount' => KontakMasuk::query()->where('status', 'baru')->count(),
+            'latestNews' => Berita::query()
+                ->latest('updated_at')
+                ->take(5)
+                ->get(['id', 'judul', 'slug', 'status', 'updated_at']),
+        ]);
     }
 
     public function agenda(Request $request): View

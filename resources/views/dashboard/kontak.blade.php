@@ -185,7 +185,7 @@
 
     <!-- Dialog detail pesan -->
     @if ($selectedMessage)
-        <dialog class="inbox-dialog inbox-detail-dialog" data-message-dialog aria-labelledby="message-detail-title">
+        <dialog class="inbox-dialog inbox-detail-dialog" data-message-dialog data-open="true" aria-labelledby="message-detail-title">
             <div class="inbox-dialog__header">
                 <div><span class="inbox-eyebrow">Detail pesan</span><h2 id="message-detail-title">{{ $selectedMessage->subjek }}</h2></div>
                 <form method="dialog"><button class="inbox-dialog__close" type="submit" aria-label="Tutup detail pesan">×</button></form>

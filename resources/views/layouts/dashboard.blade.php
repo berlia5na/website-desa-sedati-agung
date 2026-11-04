@@ -48,7 +48,7 @@
     <div class="admin-shell">
         <aside class="admin-sidebar" id="admin-sidebar">
             <a class="admin-brand" href="{{ route('admin.dashboard') }}">
-                <span class="admin-brand__logo" aria-hidden="true">SA</span>
+                <img class="admin-brand__logo" src="{{ asset('assets/image/logo-sidoarjo.svg') }}" alt="Logo Desa Sedati Agung">
                 <span>
                     <strong>Desa Sedati Agung</strong>
                     <small>Portal Administrasi</small>
@@ -106,8 +106,13 @@
                         <span class="admin-theme-toggle__label">Mode gelap</span>
                     </button>
                     <div class="admin-notifications">
-                        <button class="admin-icon-button" type="button" aria-label="Notifikasi" aria-expanded="false" data-notification-toggle>♧</button>
-                        <div class="admin-notification-popover" hidden data-notification-popover>
+                        <button class="admin-icon-button" type="button" aria-label="Notifikasi" aria-expanded="false" aria-controls="admin-notification-popover" data-notification-toggle>
+                            <svg class="admin-notification-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" />
+                                <path d="M10 21h4" />
+                            </svg>
+                        </button>
+                        <div class="admin-notification-popover" id="admin-notification-popover" role="status" aria-live="polite" hidden data-notification-popover>
                             Belum ada notifikasi baru.
                         </div>
                     </div>

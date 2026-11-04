@@ -17,11 +17,6 @@ body.admin-profil-desa-page .admin-sidebar {
     border-right-color: #e3e8f5;
 }
 
-body.admin-profil-desa-page .admin-brand__logo {
-    border-radius: 50%;
-    background: #2d6197;
-}
-
 body.admin-profil-desa-page .admin-brand strong {
     color: #2d6197;
 }
@@ -66,7 +61,7 @@ body.admin-profil-desa-page .admin-main {
 }
 
 .village-profile__toolbar h1 {
-    font-size: 30px;
+    font-size: 32.4px;
 }
 
 .village-profile__toolbar p,
@@ -74,14 +69,14 @@ body.admin-profil-desa-page .admin-main {
 .site-editor-history__intro > p {
     margin: 7px 0 0;
     color: var(--profile-muted);
-    font-size: 13px;
+    font-size: 14.0px;
 }
 
 .village-profile__eyebrow {
     display: block;
     margin-bottom: 7px;
     color: var(--profile-orange);
-    font-size: 10px;
+    font-size: 10.8px;
     font-weight: 750;
     letter-spacing: .07em;
 }
@@ -95,7 +90,7 @@ body.admin-profil-desa-page .admin-main {
     border-radius: 999px;
     background: var(--profile-blue);
     color: #fff;
-    font-size: 12px;
+    font-size: 13.0px;
     font-weight: 650;
 }
 
@@ -110,7 +105,7 @@ body.admin-profil-desa-page .admin-main {
     border-radius: 10px;
     background: #effaf3;
     color: #17663d;
-    font-size: 13px;
+    font-size: 14.0px;
 }
 
 .village-profile__errors {
@@ -155,7 +150,7 @@ body.admin-profil-desa-page .admin-main {
     border-radius: 999px;
     background: #fff;
     color: var(--profile-blue);
-    font-size: 10px;
+    font-size: 10.8px;
     font-weight: 700;
 }
 
@@ -176,7 +171,7 @@ body.admin-profil-desa-page .admin-main {
 
 .site-editor-image__label {
     color: var(--profile-blue);
-    font-size: 10px;
+    font-size: 10.8px;
     font-weight: 750;
     letter-spacing: .07em;
 }
@@ -192,7 +187,7 @@ body.admin-profil-desa-page .admin-main {
     border-radius: 14px;
     background: linear-gradient(135deg, #9fb7cc, #6f8fae);
     color: #fff;
-    font-size: 12px;
+    font-size: 13.0px;
     object-fit: cover;
     text-align: center;
 }
@@ -212,7 +207,7 @@ body.admin-profil-desa-page .admin-main {
 
 .site-editor-section__heading h2,
 .site-editor-history__intro h2 {
-    font-size: 27px;
+    font-size: 29.2px;
 }
 
 .site-editor-section__heading--row {
@@ -290,7 +285,7 @@ body.admin-profil-desa-page .admin-main {
     place-items: center;
     border-radius: 9px;
     background: var(--profile-blue-soft);
-    font-size: 15px;
+    font-size: 16.2px;
 }
 
 .site-editor-stat > span svg {
@@ -301,7 +296,7 @@ body.admin-profil-desa-page .admin-main {
 
 .site-editor-stat label {
     color: var(--profile-muted);
-    font-size: 11px;
+    font-size: 11.9px;
     font-weight: 650;
 }
 
@@ -315,7 +310,7 @@ body.admin-profil-desa-page .admin-main {
     background: transparent;
     color: var(--profile-blue);
     font-family: "Source Serif 4", Georgia, serif;
-    font-size: 22px;
+    font-size: 23.8px;
     font-weight: 700;
 }
 
@@ -325,7 +320,7 @@ body.admin-profil-desa-page .admin-main {
 
 .site-editor-stat small {
     color: var(--profile-muted);
-    font-size: 10px;
+    font-size: 10.8px;
 }
 
 .site-editor-period {
@@ -357,7 +352,7 @@ body.admin-profil-desa-page .admin-main {
     padding: 0 7px;
     color: var(--profile-blue);
     font-family: "Source Serif 4", Georgia, serif;
-    font-size: 14px;
+    font-size: 15.1px;
     font-weight: 700;
 }
 
@@ -380,7 +375,7 @@ body.admin-profil-desa-page .admin-main {
     border-radius: 6px;
     background: transparent;
     color: #a33a46;
-    font-size: 10px;
+    font-size: 10.8px;
     font-weight: 700;
 }
 
@@ -396,7 +391,7 @@ body.admin-profil-desa-page .admin-main {
 .site-editor-member__deleted {
     margin: 0;
     color: #a33a46;
-    font-size: 11px;
+    font-size: 11.9px;
 }
 
 .site-editor-add-member {
@@ -406,7 +401,7 @@ body.admin-profil-desa-page .admin-main {
     border-radius: 999px;
     background: #fff;
     color: var(--profile-orange);
-    font-size: 12px;
+    font-size: 13.0px;
     font-weight: 700;
 }
 
@@ -447,7 +442,7 @@ body.admin-profil-desa-page .admin-main {
 .site-editor-map__link {
     justify-self: start;
     color: var(--profile-blue);
-    font-size: 11px;
+    font-size: 11.9px;
     font-weight: 700;
 }
 
@@ -474,7 +469,7 @@ body.admin-profil-desa-page .admin-main {
 
 .village-profile__field label {
     color: var(--profile-text);
-    font-size: 11px;
+    font-size: 11.9px;
     font-weight: 700;
     line-height: 1.4;
 }
@@ -500,7 +495,7 @@ body.admin-profil-desa-page .admin-main {
 
 .village-profile__field input[type="file"] {
     padding: 7px;
-    font-size: 10px;
+    font-size: 10.8px;
 }
 
 .village-profile__field input:focus,
@@ -512,7 +507,7 @@ body.admin-profil-desa-page .admin-main {
 .village-profile__hint,
 .village-profile__current-file {
     color: var(--profile-muted);
-    font-size: 10px;
+    font-size: 10.8px;
     font-weight: 400;
 }
 
@@ -525,7 +520,7 @@ body.admin-profil-desa-page .admin-main {
 
 .village-profile__field-error {
     color: #b42332;
-    font-size: 10px;
+    font-size: 10.8px;
 }
 
 .village-profile__actions {
@@ -546,7 +541,7 @@ body.admin-profil-desa-page .admin-main {
 
 .village-profile__actions > span {
     color: var(--profile-muted);
-    font-size: 11px;
+    font-size: 11.9px;
 }
 
 .village-profile__actions button {
@@ -561,7 +556,7 @@ body.admin-profil-desa-page .admin-main {
     border-radius: 999px;
     background: var(--profile-blue);
     color: #fff;
-    font-size: 11px;
+    font-size: 11.9px;
     font-weight: 700;
 }
 

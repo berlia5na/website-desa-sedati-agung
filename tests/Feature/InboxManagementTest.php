@@ -119,6 +119,8 @@ class InboxManagementTest extends TestCase
 
         $this->get(route('admin.kontak', ['pesan' => $message->id]))
             ->assertOk()
+            ->assertSee('data-message-dialog data-open="true"', false)
+            ->assertSee('Detail pesan', false)
             ->assertSee('&lt;script&gt;alert(1)&lt;/script&gt;', false)
             ->assertDontSee('<script>alert(1)</script>', false);
     }
@@ -161,7 +163,7 @@ class InboxManagementTest extends TestCase
 
     public function test_contact_seeder_adds_at_least_twelve_example_messages_idempotently(): void
     {
-        $seeder = new KontakMasukSeeder();
+        $seeder = new KontakMasukSeeder;
         $seeder->run();
         $seeder->run();
 

@@ -57,6 +57,7 @@
                     <button class="admin-tab" id="tab-statistics" type="button" role="tab" aria-selected="false" aria-controls="panel-statistics" data-admin-tab="statistics" tabindex="-1">Statistik Utama Desa</button>
                     <button class="admin-tab" id="tab-greeting" type="button" role="tab" aria-selected="false" aria-controls="panel-greeting" data-admin-tab="greeting" tabindex="-1">Sambutan Kepala Desa &amp; BUMDes</button>
                     <button class="admin-tab" id="tab-widgets" type="button" role="tab" aria-selected="false" aria-controls="panel-widgets" data-admin-tab="widgets" tabindex="-1">Widget &amp; Banner Layanan</button>
+                    <button class="admin-tab" id="tab-budget" type="button" role="tab" aria-selected="false" aria-controls="panel-budget" data-admin-tab="budget" tabindex="-1">Transparansi Anggaran</button>
                 </div>
 
                 <section class="editor-panel" id="panel-hero" role="tabpanel" aria-labelledby="tab-hero" data-admin-panel="hero">
@@ -246,6 +247,57 @@
                             <span class="editor-field__hint">Belum ada berita atau agenda terpublikasi yang dapat dipilih.</span>
                         @endif
                     </div>
+                </section>
+
+                <section class="editor-panel" id="panel-budget" role="tabpanel" aria-labelledby="tab-budget" data-admin-panel="budget" hidden>
+                    <div class="editor-panel__heading">
+                        <span class="editor-panel__icon" aria-hidden="true">▤</span>
+                        <div><h2>Transparansi Anggaran Desa</h2><p>Masukkan angka resmi APBDes dan realisasi untuk ditampilkan di halaman publik.</p></div>
+                    </div>
+
+                    <div class="editor-fields">
+                        <div class="editor-field">
+                            <label for="anggaran_tahun">Tahun anggaran</label>
+                            <input id="anggaran_tahun" name="anggaran_tahun" type="number" min="2000" max="2100" step="1" value="{{ old('anggaran_tahun', $halaman->anggaran_tahun) }}" placeholder="{{ now()->year }}">
+                            @error('anggaran_tahun') <span class="form-error">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="editor-field editor-field--full">
+                            <p class="budget-editor__columns" aria-hidden="true"><span>Anggaran</span><span>Realisasi</span></p>
+                        </div>
+                        @foreach ([
+                            'pendapatan' => 'Pendapatan',
+                            'belanja' => 'Belanja',
+                            'pembiayaan' => 'Pembiayaan',
+                        ] as $jenisAnggaran => $labelAnggaran)
+                            <div class="editor-field editor-field--full">
+                                <span class="budget-editor__label">{{ $labelAnggaran }}</span>
+                                <div class="budget-editor__row">
+                                    <label class="budget-editor__amount" for="anggaran_{{ $jenisAnggaran }}">
+                                        <span>Anggaran</span>
+                                        <span class="budget-editor__input-prefix">Rp<input id="anggaran_{{ $jenisAnggaran }}" name="anggaran_{{ $jenisAnggaran }}" type="number" min="0" max="999999999999999999" step="1" value="{{ old('anggaran_'.$jenisAnggaran, $halaman->{'anggaran_'.$jenisAnggaran}) }}" placeholder="0"></span>
+                                    </label>
+                                    <label class="budget-editor__amount" for="realisasi_{{ $jenisAnggaran }}">
+                                        <span>Realisasi</span>
+                                        <span class="budget-editor__input-prefix">Rp<input id="realisasi_{{ $jenisAnggaran }}" name="realisasi_{{ $jenisAnggaran }}" type="number" min="0" max="999999999999999999" step="1" value="{{ old('realisasi_'.$jenisAnggaran, $halaman->{'realisasi_'.$jenisAnggaran}) }}" placeholder="0"></span>
+                                    </label>
+                                </div>
+                                @error('anggaran_'.$jenisAnggaran) <span class="form-error">{{ $message }}</span> @enderror
+                                @error('realisasi_'.$jenisAnggaran) <span class="form-error">{{ $message }}</span> @enderror
+                            </div>
+                        @endforeach
+                        <div class="editor-field editor-field--full">
+                            <label for="anggaran_keterangan">Keterangan</label>
+                            <textarea id="anggaran_keterangan" name="anggaran_keterangan" rows="3" maxlength="2000" placeholder="Jelaskan periode atau catatan penting terkait data anggaran.">{{ old('anggaran_keterangan', $halaman->anggaran_keterangan) }}</textarea>
+                            @error('anggaran_keterangan') <span class="form-error">{{ $message }}</span> @enderror
+                        </div>
+                        <div class="editor-field editor-field--full">
+                            <label for="anggaran_dokumen_url">Tautan dokumen APBDes (opsional)</label>
+                            <input id="anggaran_dokumen_url" name="anggaran_dokumen_url" type="text" maxlength="255" value="{{ old('anggaran_dokumen_url', $halaman->anggaran_dokumen_url) }}" placeholder="https://... atau /dokumen/apbdes.pdf">
+                            <span class="editor-field__hint">Masukkan tautan HTTPS atau alamat dokumen di website desa.</span>
+                            @error('anggaran_dokumen_url') <span class="form-error">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <p class="editor-note"><span aria-hidden="true">i</span> Pastikan data sesuai dokumen resmi sebelum menyimpan dan mempublikasikan.</p>
                 </section>
 
                 <div class="home-editor__footer">
