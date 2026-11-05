@@ -69,18 +69,52 @@
                 @endif
                 <a class="text-link" href="{{ route('profil-desa') }}">Selengkapnya tentang desa <span aria-hidden="true">→</span></a>
 
-                <div class="transparency-card">
-                    <div class="transparency-card__heading">
-                        <span class="transparency-card__icon" aria-hidden="true">▤</span>
-                        <strong>Transparansi Anggaran Desa</strong>
-                        <span class="status-pill">Informasi publik</span>
-                    </div>
-                    <p>Rincian anggaran dan realisasi dapat ditampilkan di sini setelah data resmi tersedia.</p>
-                    <span class="transparency-card__note">Informasi publik Desa Sedati Agung</span>
-                </div>
             </div>
         </section>
     @endif
+
+    <section class="transparency-section section-wrap" aria-labelledby="transparency-heading">
+        <div class="transparency-card">
+            <div class="transparency-card__heading">
+                <span class="transparency-card__icon" aria-hidden="true">▤</span>
+                <strong id="transparency-heading">Transparansi Anggaran Desa</strong>
+                @if ($halamanBeranda?->anggaran_tahun)
+                    <span class="status-pill">Tahun Anggaran {{ $halamanBeranda->anggaran_tahun }}</span>
+                @else
+                    <span class="status-pill">Informasi publik</span>
+                @endif
+            </div>
+            @if ($halamanBeranda?->anggaran_tahun || $halamanBeranda?->anggaran_keterangan)
+                @if ($halamanBeranda->anggaran_keterangan)
+                    <p>{{ $halamanBeranda->anggaran_keterangan }}</p>
+                @endif
+                <div class="transparency-card__table" role="table" aria-label="Anggaran dan realisasi desa">
+                    <div class="transparency-card__row transparency-card__row--head" role="row">
+                        <span role="columnheader">Bidang</span><span role="columnheader">Anggaran</span><span role="columnheader">Realisasi</span>
+                    </div>
+                    @foreach ([
+                        'pendapatan' => 'Pendapatan',
+                        'belanja' => 'Belanja',
+                        'pembiayaan' => 'Pembiayaan',
+                    ] as $jenisAnggaran => $labelAnggaran)
+                        <div class="transparency-card__row" role="row">
+                            <strong role="rowheader">{{ $labelAnggaran }}</strong>
+                            <span role="cell">{{ $halamanBeranda->{'anggaran_'.$jenisAnggaran} !== null ? 'Rp '.number_format($halamanBeranda->{'anggaran_'.$jenisAnggaran}, 0, ',', '.') : 'Belum tersedia' }}</span>
+                            <span role="cell">{{ $halamanBeranda->{'realisasi_'.$jenisAnggaran} !== null ? 'Rp '.number_format($halamanBeranda->{'realisasi_'.$jenisAnggaran}, 0, ',', '.') : 'Belum tersedia' }}</span>
+                        </div>
+                    @endforeach
+                </div>
+                @if ($halamanBeranda->anggaran_dokumen_url)
+                    <a class="transparency-card__document" href="{{ str_starts_with($halamanBeranda->anggaran_dokumen_url, '/') ? url($halamanBeranda->anggaran_dokumen_url) : $halamanBeranda->anggaran_dokumen_url }}" target="_blank" rel="noopener noreferrer">
+                        Lihat dokumen APBDes <span aria-hidden="true">↗</span>
+                    </a>
+                @endif
+            @else
+                <p>Informasi anggaran desa belum diperbarui. Silakan kunjungi kembali halaman ini.</p>
+            @endif
+            <span class="transparency-card__note">Informasi publik Desa Sedati Agung</span>
+        </div>
+    </section>
 
     @if ($sorotanTerkini->isNotEmpty())
         <section class="home-updates">

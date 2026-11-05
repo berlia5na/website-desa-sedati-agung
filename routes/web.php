@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Dashboard\AdminAccountController;
 use App\Http\Controllers\Dashboard\BerandaController;
 use App\Http\Controllers\Dashboard\BeritaController;
 use App\Http\Controllers\Dashboard\BumdesController;
@@ -9,9 +10,10 @@ use App\Http\Controllers\Dashboard\KontakMasukController;
 use App\Http\Controllers\Dashboard\ProfilDesaController;
 use App\Http\Controllers\Landing\PageController as LandingPageController;
 use App\Http\Controllers\ProfilDesaLengkapController;
+use App\Http\Middleware\TrackPublicVisitor;
 use Illuminate\Support\Facades\Route;
 
-Route::controller(LandingPageController::class)->group(function () {
+Route::middleware(TrackPublicVisitor::class)->controller(LandingPageController::class)->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('/profil-desa', 'profilDesa')->name('profil-desa');
     Route::get('/profil-bumdes', 'profilBumdes')->name('profil-bumdes');
@@ -32,6 +34,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware(['auth', 'admin'])->group(function () {
         Route::post('/logout', [AdminLoginController::class, 'destroy'])->name('logout');
+
+        Route::get('/admins', [AdminAccountController::class, 'index'])->name('admins');
+        Route::post('/admins', [AdminAccountController::class, 'store'])->name('admins.store');
+        Route::put('/admins/{user}', [AdminAccountController::class, 'update'])->whereNumber('user')->name('admins.update');
+        Route::delete('/admins/{user}', [AdminAccountController::class, 'destroy'])->whereNumber('user')->name('admins.delete');
 
         Route::controller(DashboardController::class)->group(function () {
             Route::get('/', 'index')->name('dashboard');
@@ -85,4 +92,5 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::get('/profil-desa', [ProfilDesaLengkapController::class, 'index'])
+    ->middleware(TrackPublicVisitor::class)
     ->name('profil-desa');

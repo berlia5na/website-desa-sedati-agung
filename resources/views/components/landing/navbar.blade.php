@@ -11,7 +11,7 @@
 
 <header class="site-header">
     <a class="site-brand" href="{{ route('home') }}" aria-label="Desa Sedati Agung, beranda">
-        <span class="site-brand__mark" aria-hidden="true">SA</span>
+        <img class="site-brand__logo" src="{{ asset('assets/image/logo-sidoarjo.svg') }}" alt="Logo Desa Sedati Agung">
         <span class="site-brand__text">
             <strong>Desa Sedati Agung</strong>
             <small>Kabupaten Sidoarjo</small>
