@@ -26,6 +26,7 @@ class User extends Authenticatable
     protected $casts = [
         'password' => 'hashed',
         'role' => 'string',
+        'is_primary_admin' => 'boolean',
     ];
 
     public function berita(): HasMany
@@ -36,5 +37,10 @@ class User extends Authenticatable
     public function agenda(): HasMany
     {
         return $this->hasMany(Agenda::class);
+    }
+
+    public function galleryPhotos(): HasMany
+    {
+        return $this->hasMany(GalleryPhoto::class);
     }
 }

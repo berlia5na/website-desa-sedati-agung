@@ -158,6 +158,7 @@ class AdminLoginTest extends TestCase
 
         $updatedAdmin = $existingAdmin->fresh();
         $this->assertSame('admin_baru', $updatedAdmin->username);
+        $this->assertTrue($updatedAdmin->is_primary_admin);
         $this->assertTrue(Hash::check('new-secure-password', $updatedAdmin->password));
         $this->assertDatabaseCount('users', 1);
     }
@@ -199,6 +200,7 @@ class AdminLoginTest extends TestCase
         $this->assertDatabaseHas('users', [
             'name' => 'Admin Desa',
             'role' => 'admin',
+            'is_primary_admin' => true,
         ]);
         $this->assertDatabaseHas('profil_desa', [
             'nama_desa' => 'Desa Sedati Agung',

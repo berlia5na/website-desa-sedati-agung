@@ -34,6 +34,10 @@ class UserSeeder extends Seeder
             ->orderBy('id')
             ->first() ?? new User;
 
+        if (! User::query()->where('is_primary_admin', true)->exists()) {
+            $admin->is_primary_admin = true;
+        }
+
         $admin->fill([
             'name' => 'Admin Desa',
             'username' => $username,

@@ -78,6 +78,11 @@
                 <a class="admin-nav__link {{ request()->routeIs('admin.kontak') ? 'is-active' : '' }}" href="{{ route('admin.kontak') }}" data-search-label="kotak masuk kontak">
                     <span class="admin-nav__icon" aria-hidden="true">✉</span><span>Kotak Masuk</span>
                 </a>
+                @if (auth()->user()->is_primary_admin)
+                    <a class="admin-nav__link {{ request()->routeIs('admin.admins*') ? 'is-active' : '' }}" href="{{ route('admin.admins') }}" data-search-label="kelola admin akun username kata sandi">
+                        <span class="admin-nav__icon" aria-hidden="true">♙</span><span>Kelola Admin</span>
+                    </a>
+                @endif
             </nav>
 
             <div class="admin-sidebar__bottom">
