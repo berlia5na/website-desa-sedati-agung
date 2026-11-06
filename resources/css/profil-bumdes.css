@@ -513,70 +513,82 @@
 
 .bumdes-management__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    gap: 14px;
 }
 
 .bumdes-role-card {
-    display: flex;
-    min-height: 220px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 24px;
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    align-items: center;
+    column-gap: 13px;
+    row-gap: 3px;
+    padding: 16px;
     border: 1px solid var(--bumdes-line);
-    border-radius: 20px;
+    border-radius: 16px;
     background: #fff;
-    box-shadow: 0 8px 26px rgba(27, 62, 91, .05);
+    box-shadow: 0 5px 16px rgba(27, 62, 91, .04);
 }
 
 .bumdes-role-card__avatar {
     display: grid;
-    width: 68px;
-    height: 68px;
+    width: 52px;
+    height: 52px;
+    grid-column: 1;
+    grid-row: 1 / span 2;
     place-items: center;
     border: 1px solid rgba(45, 97, 151, .13);
     border-radius: 50%;
     background: #edf4fb;
     color: var(--bumdes-blue);
     font-family: var(--serif, Georgia, serif);
-    font-size: 28px;
+    font-size: 23px;
     font-weight: 700;
 }
 
 .bumdes-role-card__photo {
-    width: 88px;
-    height: 88px;
+    width: 52px;
+    height: 52px;
+    grid-column: 1;
+    grid-row: 1 / span 2;
     border: 1px solid rgba(45, 97, 151, .13);
-    border-radius: 18px;
+    border-radius: 50%;
     object-fit: cover;
-    box-shadow: 0 6px 18px rgba(27, 62, 91, .1);
+    box-shadow: 0 3px 10px rgba(27, 62, 91, .08);
 }
 
 .bumdes-role-card h3 {
     margin: 0;
+    grid-column: 2;
+    align-self: end;
     color: var(--bumdes-blue);
     font-family: var(--serif, Georgia, serif);
-    font-size: 23px;
+    font-size: 18px;
     line-height: 1.3;
 }
 
 .bumdes-role-card__position {
-    padding: 7px 11px;
+    width: fit-content;
+    max-width: 100%;
+    padding: 4px 8px;
+    grid-column: 2;
+    align-self: start;
     border-radius: 999px;
     background: #fff0e4;
     color: var(--bumdes-brown);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     line-height: 1.4;
+    overflow-wrap: anywhere;
 }
 
 .bumdes-role-card p {
     max-width: 320px;
-    margin: 0;
+    margin: 8px 0 0;
+    grid-column: 1 / -1;
     color: var(--bumdes-muted);
-    font-size: 15px;
-    line-height: 1.65;
+    font-size: 13px;
+    line-height: 1.55;
 }
 
 .bumdes-management__empty {
@@ -611,21 +623,21 @@
 .bumdes-units__grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
+    gap: 16px;
 }
 
 .bumdes-unit-card {
     overflow: hidden;
     border: 1px solid var(--bumdes-line);
-    border-radius: 26px;
+    border-radius: 18px;
     background: #fff;
-    box-shadow: 0 10px 30px rgba(27, 62, 91, .06);
+    box-shadow: 0 5px 18px rgba(27, 62, 91, .045);
 }
 
 .bumdes-unit-card__image {
     position: relative;
     display: grid;
-    height: 190px;
+    height: 148px;
     place-items: center;
     overflow: hidden;
     background:
@@ -641,24 +653,24 @@
 
 .bumdes-unit-card__placeholder {
     display: grid;
-    width: 74px;
-    height: 74px;
+    width: 52px;
+    height: 52px;
     place-items: center;
     border: 1px solid rgba(255, 255, 255, .9);
-    border-radius: 24px;
+    border-radius: 17px;
     background: rgba(255, 255, 255, .68);
     color: var(--bumdes-blue);
-    font-size: 34px;
-    box-shadow: 0 10px 26px rgba(27, 62, 91, .08);
+    font-size: 25px;
+    box-shadow: 0 5px 16px rgba(27, 62, 91, .06);
 }
 
 .bumdes-unit-card__category {
     position: absolute;
-    top: 13px;
-    left: 13px;
+    top: 10px;
+    left: 10px;
     max-width: calc(100% - 26px);
     overflow: hidden;
-    padding: 6px 10px;
+    padding: 5px 9px;
     border-radius: 999px;
     background: rgba(255, 255, 255, .92);
     color: var(--bumdes-blue);
@@ -669,7 +681,7 @@
 }
 
 .bumdes-unit-card__body {
-    padding: 22px;
+    padding: 16px;
 }
 
 .bumdes-unit-card__status {
@@ -687,24 +699,23 @@
 }
 
 .bumdes-unit-card h3 {
-    margin: 9px 0;
+    margin: 7px 0;
     color: var(--bumdes-blue);
     font-family: var(--serif, Georgia, serif);
-    font-size: 22px;
+    font-size: 19px;
     line-height: 1.25;
 }
 
 .bumdes-unit-card p {
-    min-height: 68px;
     margin: 0;
     color: var(--bumdes-muted);
     font-size: 13px;
-    line-height: 1.75;
+    line-height: 1.6;
 }
 
 .bumdes-unit-card__price {
     display: inline-block;
-    margin-top: 14px;
+    margin-top: 10px;
     color: var(--bumdes-brown);
     font-size: 12px;
     font-weight: 700;
@@ -712,13 +723,13 @@
 
 .bumdes-unit-card__contact {
     display: flex;
-    min-height: 46px;
+    min-height: 38px;
     align-items: center;
     justify-content: center;
-    margin-top: 16px;
-    padding: 10px 14px;
+    margin-top: 12px;
+    padding: 8px 11px;
     border: 1px solid rgba(45, 97, 151, .25);
-    border-radius: 12px;
+    border-radius: 10px;
     background: #edf4fb;
     color: var(--bumdes-blue);
     font-size: 13px;
@@ -902,32 +913,15 @@
     }
 
     .bumdes-management__grid {
-        gap: 12px;
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
 
     .bumdes-role-card {
-        min-height: 190px;
-        padding: 20px;
-    }
-
-    .bumdes-role-card__avatar {
-        width: 58px;
-        height: 58px;
+        padding: 14px;
     }
 
     .bumdes-role-card h3 {
-        font-size: 21px;
-    }
-
-    .bumdes-role-card p {
-        font-size: 14px;
-    }
-
-    .bumdes-role-card__position {
-        font-size: 13px;
-    }
-
-    .bumdes-unit-card p {
-        min-height: auto;
+        font-size: 17px;
     }
 }
