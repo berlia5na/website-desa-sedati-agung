@@ -99,9 +99,7 @@
                             @endif
                         </div>
                         <input id="foto" name="foto" type="file" accept="image/*">
-                        @if ($profil->foto)
-                            <label class="bumdes-editor__hint"><input type="checkbox" name="hapus_foto" value="1" @checked(old('hapus_foto'))> Hapus foto BUMDes saat disimpan</label>
-                        @endif
+                        <x-admin.clear-upload-button for="foto" deleteName="{{ $profil->foto ? 'hapus_foto' : null }}" :checked="old('hapus_foto', false)" />
                         <small class="bumdes-editor__hint">Pilih foto kegiatan atau suasana BUMDes. JPG, PNG, atau WebP; ukuran mengikuti batas unggah server.</small>
                         @error('foto') <small class="form-error">{{ $message }}</small> @enderror
                         <div class="bumdes-editor__metrics">

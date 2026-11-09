@@ -92,10 +92,10 @@ class BerandaController extends Controller
         ]);
         $gambarHeroLama = $halaman->gambar;
         $fotoSambutanLama = $halaman->sambutan_foto;
-        $heroImage = $request->file('hero_image')
+        $heroImage = $request->hasFile('hero_image')
             ? $this->storePublicImage($request, 'hero_image')
             : ($request->boolean('hapus_gambar_hero') ? null : $halaman->gambar);
-        $welcomePhoto = $request->file('sambutan_foto')
+        $welcomePhoto = $request->hasFile('sambutan_foto')
             ? $this->storePublicImage($request, 'sambutan_foto')
             : ($request->boolean('hapus_foto_sambutan') ? null : $halaman->sambutan_foto);
 

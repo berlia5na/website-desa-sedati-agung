@@ -74,10 +74,10 @@
                     <p class="news-editor__hint">Gunakan foto yang jelas dan relevan. JPG, PNG, atau WebP; ukuran mengikuti batas unggah server.</p>
                     @if ($berita->gambar_url)
                         <img class="news-editor__preview" src="{{ $berita->gambar_url }}" alt="Foto berita saat ini">
-                        <label class="news-editor__hint"><input type="checkbox" name="hapus_gambar" value="1"> Hapus foto saat berita disimpan</label>
                     @endif
                     <label class="news-editor__upload" for="gambar"><span aria-hidden="true">↑</span><span>Pilih foto dari perangkat</span></label>
                     <input class="news-editor__file" id="gambar" name="gambar" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
+                    <x-admin.clear-upload-button for="gambar" label="gambar" deleteName="{{ $berita->gambar_url ? 'hapus_gambar' : null }}" :checked="old('hapus_gambar', false)" />
                     @error('gambar') <span class="form-error">{{ $message }}</span> @enderror
                 </section>
 

@@ -90,9 +90,7 @@
                     <div class="village-profile__field">
                         <label for="foto">Unggah foto utama</label>
                         <input id="foto" name="foto" type="file" accept="image/*">
-                        @if ($profil->foto)
-                            <label class="village-profile__hint"><input type="checkbox" name="hapus_foto" value="1" @checked(old('hapus_foto'))> Hapus foto utama saat disimpan</label>
-                        @endif
+                        <x-admin.clear-upload-button for="foto" deleteName="{{ $profil->foto ? 'hapus_foto' : null }}" :checked="old('hapus_foto', false)" />
                         @error('foto') <span class="village-profile__field-error">{{ $message }}</span> @enderror
                     </div>
                     <div class="village-profile__field">
@@ -238,9 +236,9 @@
                                 <div class="village-profile__field site-editor-member__photo">
                                     <label for="perangkat-{{ $index }}-foto">Foto</label>
                                     <input id="perangkat-{{ $index }}-foto" name="perangkat[{{ $index }}][foto]" type="file" accept="image/*">
+                                    <x-admin.clear-upload-button for="perangkat-{{ $index }}-foto" :delete-name="$anggota->foto ? 'perangkat[' . $index . '][hapus_foto]' : null" :checked="old('perangkat.' . $index . '.hapus_foto', false)" />
                                     @if ($anggota->foto)
                                         <span class="village-profile__current-file"><a href="{{ asset($anggota->foto) }}" target="_blank" rel="noopener">Foto tersimpan</a></span>
-                                        <label class="village-profile__hint"><input type="checkbox" name="perangkat[{{ $index }}][hapus_foto]" value="1" @checked(old("perangkat.$index.hapus_foto"))> Hapus foto perangkat saat disimpan</label>
                                     @endif
                                     @error("perangkat.{$index}.foto") <span class="village-profile__field-error">{{ $message }}</span> @enderror
                                 </div>
@@ -273,6 +271,7 @@
                             <div class="village-profile__field site-editor-member__photo">
                                 <label for="perangkat-__INDEX__-foto">Foto</label>
                                 <input id="perangkat-__INDEX__-foto" name="perangkat[__INDEX__][foto]" type="file" accept="image/*">
+                                <x-admin.clear-upload-button for="perangkat-__INDEX__-foto" />
                             </div>
                         </div>
                     </fieldset>

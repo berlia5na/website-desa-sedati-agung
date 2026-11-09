@@ -6,6 +6,84 @@ const notificationPopover = document.querySelector('[data-notification-popover]'
 const themeToggle = document.querySelector('[data-theme-toggle]');
 const deleteSambutanButton = document.querySelector('[data-delete-sambutan]');
 
+const syncMediaDeleteControl = (button) => {
+    const fileInput = document.getElementById(button.dataset.clearUploadFor);
+    const deleteInput = button.parentElement.querySelector('[data-saved-media-delete]');
+    const hasSelectedFile = Boolean(fileInput?.files?.length);
+    const hasSavedFile = Boolean(deleteInput);
+    const isMarkedForDeletion = Boolean(deleteInput?.checked);
+    const label = hasSelectedFile
+        ? `Hapus ${button.dataset.mediaLabel} yang dipilih`
+        : isMarkedForDeletion
+            ? `Batalkan hapus ${button.dataset.mediaLabel}`
+            : `Hapus ${button.dataset.mediaLabel}`;
+
+    button.hidden = !hasSelectedFile && !hasSavedFile;
+    button.setAttribute('aria-pressed', String(isMarkedForDeletion && !hasSelectedFile));
+    button.setAttribute('aria-label', label);
+    button.title = label;
+    button.querySelector('[data-media-delete-label]').textContent = label;
+
+    let warning = button.nextElementSibling;
+    if (!warning?.matches('.admin-photo-delete-warning')) {
+        warning = document.createElement('small');
+        warning.className = 'admin-photo-delete-warning';
+        warning.setAttribute('role', 'status');
+        warning.textContent = 'Foto/gambar yang sudah dipublikasikan tetap tampil sampai Anda menekan Simpan atau Publikasikan.';
+        button.insertAdjacentElement('afterend', warning);
+    }
+
+    warning.hidden = !isMarkedForDeletion || hasSelectedFile;
+};
+
+document.querySelectorAll('[data-media-delete-control]').forEach(syncMediaDeleteControl);
+
+document.addEventListener('change', (event) => {
+    const input = event.target;
+    if (input.matches('[data-saved-media-delete]')) {
+        const button = input.parentElement.querySelector('[data-media-delete-control]');
+        if (button) {
+            syncMediaDeleteControl(button);
+        }
+    } else if (input.matches('input[type="file"]') && input.id) {
+        const button = document.querySelector(`[data-clear-upload-for="${CSS.escape(input.id)}"]`);
+        if (button) {
+            const deleteInput = button.parentElement.querySelector('[data-saved-media-delete]');
+            if (input.files?.length && deleteInput) {
+                deleteInput.checked = false;
+            }
+            syncMediaDeleteControl(button);
+        }
+    }
+});
+
+document.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-media-delete-control]');
+    if (!button) {
+        return;
+    }
+
+    const fileInput = document.getElementById(button.dataset.clearUploadFor);
+    if (fileInput?.files?.length) {
+        fileInput.value = '';
+        fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+    } else {
+        const deleteInput = button.parentElement.querySelector('[data-saved-media-delete]');
+        if (deleteInput) {
+            deleteInput.checked = !deleteInput.checked;
+            deleteInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    }
+
+    syncMediaDeleteControl(button);
+});
+
+document.addEventListener('reset', (event) => {
+    window.setTimeout(() => {
+        event.target.querySelectorAll('[data-media-delete-control]').forEach(syncMediaDeleteControl);
+    }, 0);
+}, true);
+
 deleteSambutanButton?.addEventListener('click', (event) => {
     if (!window.confirm('Hapus sambutan kepala desa beserta foto dari halaman beranda?')) {
         event.preventDefault();
@@ -191,7 +269,9 @@ if (editorForm) {
 
     editorForm.addEventListener('input', () => syncPreview());
     editorForm.addEventListener('change', (event) => syncPreview(event.target.matches('[type="file"]')));
-    editorForm.addEventListener('reset', () => window.setTimeout(() => syncPreview(true), 0));
+    editorForm.addEventListener('reset', () => window.setTimeout(() => {
+        syncPreview(true);
+    }, 0));
 
     const spotlightSelect = editorForm.querySelector('[name="sorotan[]"]');
     const spotlightError = editorForm.querySelector('[data-spotlight-error]');

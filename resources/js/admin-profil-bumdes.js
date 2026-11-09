@@ -9,11 +9,17 @@ const photoPreview = document.querySelector('[data-bumdes-photo-preview]');
 
 if (photoInput && photoPreview) {
     let previewUrl = null;
+    const savedPreview = [...photoPreview.childNodes].map((node) => node.cloneNode(true));
 
     photoInput.addEventListener('change', () => {
         const photo = photoInput.files?.[0];
 
         if (!photo) {
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+                previewUrl = null;
+            }
+            photoPreview.replaceChildren(...savedPreview.map((node) => node.cloneNode(true)));
             return;
         }
 
@@ -33,6 +39,11 @@ if (photoInput && photoPreview) {
 
 if (managerList && addManagerButton && managerTemplate) {
     const managerPreviewUrls = new WeakMap();
+    const savedManagerPreviews = new WeakMap();
+    managerList.querySelectorAll('[data-bumdes-manager]').forEach((card) => {
+        const preview = card.querySelector('[data-manager-photo-preview]');
+        savedManagerPreviews.set(card, [...preview.childNodes].map((node) => node.cloneNode(true)));
+    });
     const syncManagerNumbers = () => {
         managerList.querySelectorAll('[data-bumdes-manager]').forEach((card, index) => {
             card.querySelector('.bumdes-manager-card__number').textContent = String(index + 1).padStart(2, '0');
@@ -49,6 +60,11 @@ if (managerList && addManagerButton && managerTemplate) {
 
         const html = managerTemplate.innerHTML.replaceAll('__INDEX__', String(index));
         managerList.insertAdjacentHTML('beforeend', html);
+        const addedCard = managerList.querySelector(`[name="pengurus[${index}][nama]"]`)?.closest('[data-bumdes-manager]');
+        const addedPreview = addedCard?.querySelector('[data-manager-photo-preview]');
+        if (addedCard && addedPreview) {
+            savedManagerPreviews.set(addedCard, [...addedPreview.childNodes].map((node) => node.cloneNode(true)));
+        }
         managerList.dataset.nextIndex = String(index + 1);
         syncManagerNumbers();
         managerList.querySelector(`[name="pengurus[${index}][nama]"]`)?.focus();
@@ -101,13 +117,20 @@ if (managerList && addManagerButton && managerTemplate) {
         const preview = card.querySelector('[data-manager-photo-preview]');
         const photo = event.target.files?.[0];
 
-        if (!photo || !preview) {
+        if (!preview) {
             return;
         }
 
         const oldPreviewUrl = managerPreviewUrls.get(card);
         if (oldPreviewUrl) {
             URL.revokeObjectURL(oldPreviewUrl);
+            managerPreviewUrls.delete(card);
+        }
+
+        if (!photo) {
+            const savedPreview = savedManagerPreviews.get(card) ?? [];
+            preview.replaceChildren(...savedPreview.map((node) => node.cloneNode(true)));
+            return;
         }
 
         const previewUrl = URL.createObjectURL(photo);

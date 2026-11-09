@@ -167,6 +167,35 @@ class HomePageManagementTest extends TestCase
         $halaman = HalamanBeranda::query()->firstOrFail();
         Storage::disk('public')->assertExists($halaman->gambar);
         Storage::disk('public')->assertExists($halaman->sambutan_foto);
+
+        $this->get(route('home'))
+            ->assertOk()
+            ->assertSee(Storage::disk('public')->url($halaman->gambar), false);
+    }
+
+    public function test_new_banner_upload_replaces_the_saved_image_when_delete_is_not_selected(): void
+    {
+        Storage::fake('public');
+        $admin = User::factory()->create();
+        $oldBanner = UploadedFile::fake()->image('banner-lama.jpg')->store('halaman-beranda', 'public');
+        $halaman = HalamanBeranda::create([
+            'judul' => 'Beranda Desa',
+            'status' => 'published',
+            'gambar' => $oldBanner,
+        ]);
+        $newBanner = UploadedFile::fake()->image('banner-baru.jpg');
+
+        $this->actingAs($admin)
+            ->put(route('admin.beranda.update'), [
+                'jumlah_usaha_bumdes' => 4,
+                'hero_image' => $newBanner,
+            ])
+            ->assertRedirect(route('admin.beranda'));
+
+        $halaman->refresh();
+        $this->assertNotSame($oldBanner, $halaman->gambar);
+        Storage::disk('public')->assertExists($halaman->gambar);
+        Storage::disk('public')->assertMissing($oldBanner);
     }
 
     public function test_greeting_is_visible_by_default_on_the_public_home_page(): void
@@ -234,6 +263,11 @@ class HomePageManagementTest extends TestCase
             ->get(route('admin.beranda'))
             ->assertOk()
             ->assertSee('name="hapus_gambar_hero"', false)
+            ->assertSee('data-media-delete-control', false)
+            ->assertSee('type="button" data-media-delete-control', false)
+            ->assertSee('data-clear-upload-for="hero_image"', false)
+            ->assertSee('title="Hapus foto yang dipilih"', false)
+            ->assertSee('admin-photo-delete__icon', false)
             ->assertSee('name="hapus_foto_sambutan"', false);
 
         $this->actingAs($admin)

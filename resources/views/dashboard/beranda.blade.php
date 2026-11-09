@@ -85,9 +85,9 @@
                                 <span class="upload-area__button">Pilih file</span>
                             </label>
                             <input class="visually-hidden" id="hero_image" name="hero_image" type="file" accept="image/*">
+                            <x-admin.clear-upload-button for="hero_image" label="gambar" deleteName="{{ $halaman->gambar ? 'hapus_gambar_hero' : '' }}" :checked="old('hapus_gambar_hero', false)" />
                             @if ($halaman->gambar)
                                 <span class="editor-field__hint">Gambar aktif: {{ basename($halaman->gambar) }}. Unggah file baru untuk menggantinya.</span>
-                                <label class="editor-field__hint"><input type="checkbox" name="hapus_gambar_hero" value="1"> Hapus gambar banner saat perubahan disimpan</label>
                             @endif
                             @error('hero_image') <span class="form-error">{{ $message }}</span> @enderror
                         </div>
@@ -149,9 +149,9 @@
                                 <span class="upload-area__button">Pilih file</span>
                             </label>
                             <input class="visually-hidden" id="sambutan_foto" name="sambutan_foto" type="file" accept="image/*">
+                            <x-admin.clear-upload-button for="sambutan_foto" deleteName="{{ $halaman->sambutan_foto ? 'hapus_foto_sambutan' : null }}" :checked="old('hapus_foto_sambutan', false)" />
                             @if ($halaman->sambutan_foto)
                                 <span class="editor-field__hint">Foto aktif: {{ basename($halaman->sambutan_foto) }}. Unggah file baru untuk menggantinya.</span>
-                                <label class="editor-field__hint"><input type="checkbox" name="hapus_foto_sambutan" value="1"> Hapus foto sambutan saat perubahan disimpan</label>
                             @endif
                             @error('sambutan_foto') <span class="form-error">{{ $message }}</span> @enderror
                         </div>

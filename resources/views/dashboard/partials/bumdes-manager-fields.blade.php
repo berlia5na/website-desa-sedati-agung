@@ -27,10 +27,8 @@
                 @endif
             </div>
             <input id="pengurus-{{ $index }}-foto" class="bumdes-manager-card__photo-input" name="pengurus[{{ $index }}][foto]" type="file" accept="image/*">
+            <x-admin.clear-upload-button for="pengurus-{{ $index }}-foto" deleteName="{{ !empty($anggota['foto_tersimpan']) ? 'pengurus[' . $index . '][hapus_foto]' : '' }}" :checked="old("pengurus.$index.hapus_foto", false)" />
             <input name="pengurus[{{ $index }}][foto_tersimpan]" type="hidden" value="{{ $anggota['foto_tersimpan'] ?? '' }}">
-            @if (!empty($anggota['foto_tersimpan']))
-                <label class="bumdes-editor__hint"><input type="checkbox" name="pengurus[{{ $index }}][hapus_foto]" value="1" @checked(old("pengurus.$index.hapus_foto"))> Hapus foto pengurus saat disimpan</label>
-            @endif
             <small class="bumdes-editor__hint">Foto JPG, PNG, atau WebP. Ukuran mengikuti batas unggah server. Unggah foto baru untuk mengganti foto saat ini.</small>
             @error("pengurus.$index.foto") <small class="form-error">{{ $message }}</small> @enderror
         </div>

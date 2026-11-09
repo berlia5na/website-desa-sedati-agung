@@ -81,7 +81,8 @@
                     </label>
                     <label class="news-admin-gallery-add-card__file">
                         <span>Pilih foto <small>JPG, PNG, WebP · mengikuti batas unggah server</small></span>
-                        <input type="file" name="image" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" required>
+                        <input id="gallery-image" type="file" name="image" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" required>
+                        <x-admin.clear-upload-button for="gallery-image" />
                     </label>
                     <button class="admin-button admin-button--primary" type="submit">Tambah ke galeri</button>
                 </form>
@@ -93,10 +94,13 @@
                             <strong>{{ $photo->title }}</strong>
                             @if ($photo->caption)<small>{{ $photo->caption }}</small>@endif
                         </div>
-                        <form method="POST" action="{{ route('admin.galeri.delete', $photo) }}" onsubmit="return confirm('Hapus foto ini dari galeri?')">
+                        <form method="POST" action="{{ route('admin.galeri.delete', $photo) }}" onsubmit="return confirm('Foto ini akan langsung dihapus dari galeri. Simpan dan publikasikan perubahan lain terlebih dahulu. Lanjutkan?')">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Hapus foto</button>
+                            <button class="admin-photo-delete" type="submit" title="Hapus foto" aria-label="Hapus foto">
+                                <x-admin.trash-icon />
+                                <span class="admin-photo-delete__label">Hapus foto</span>
+                            </button>
                         </form>
                     </article>
                 @endforeach
