@@ -184,10 +184,9 @@
                                 @else
                                     <span class="bumdes-unit-card__placeholder" aria-hidden="true">✦</span>
                                 @endif
-                                <span class="bumdes-unit-card__category">{{ $unit->jenis }}</span>
                             </div>
                             <div class="bumdes-unit-card__body">
-                                <span class="bumdes-unit-card__status"><span aria-hidden="true"></span> Aktif</span>
+                                <span class="bumdes-unit-card__category">{{ $unit->jenis }}</span>
                                 <h3>{{ $unit->nama_unit }}</h3>
                                 <p>{{ $unit->deskripsi ?: 'Informasi mengenai unit usaha ini akan segera diperbarui.' }}</p>
                                 @if ($unit->harga !== null)

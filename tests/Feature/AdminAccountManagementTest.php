@@ -97,6 +97,24 @@ class AdminAccountManagementTest extends TestCase
         $this->assertTrue(Hash::check('another-new-password', $account->fresh()->password));
     }
 
+    public function test_primary_admin_can_change_own_password(): void
+    {
+        $admin = $this->createPrimaryAdmin(['password' => 'my-current-password']);
+
+        $this->actingAs($admin)
+            ->put(route('admin.admins.update', $admin), [
+                'name' => $admin->name,
+                'username' => $admin->username,
+                'password' => 'my-new-password',
+                'password_confirmation' => 'my-new-password',
+                'current_password' => 'my-current-password',
+            ])
+            ->assertRedirect(route('admin.admins'))
+            ->assertSessionHas('status');
+
+        $this->assertTrue(Hash::check('my-new-password', $admin->fresh()->password));
+    }
+
     public function test_admin_cannot_create_account_with_wrong_confirmation_password_or_short_password(): void
     {
         $admin = $this->createPrimaryAdmin(['password' => 'my-current-password']);

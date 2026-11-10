@@ -1476,7 +1476,10 @@ a {
 
 .news-featured__media {
     position: relative;
-    min-height: 518px;
+    width: 100%;
+    max-width: 746px;
+    aspect-ratio: 16 / 9;
+    align-self: center;
     background: #c4c4c4;
 }
 
@@ -1940,7 +1943,7 @@ a {
     }
 
     .news-featured__media {
-        min-height: 360px;
+        max-width: 100%;
     }
 
     .news-grid {
