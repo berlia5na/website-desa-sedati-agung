@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Website Desa Sedati Agung')</title>
+    <script>
+        (() => {
+            let savedTheme = null;
+
+            try {
+                savedTheme = localStorage.getItem('site-theme');
+            } catch (error) {
+                console.warn('Preferensi tema tidak dapat dibaca dari penyimpanan browser.', error);
+            }
+
+            const theme = ['light', 'dark'].includes(savedTheme)
+                ? savedTheme
+                : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+            document.documentElement.dataset.theme = theme;
+        })();
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -146,7 +146,10 @@
                                         </div>
                                     </td>
                                     <td data-label="Subjek"><span class="inbox-subject">{{ $message->subjek }}</span></td>
-                                    <td data-label="Cuplikan Pesan"><span class="inbox-excerpt">{{ \Illuminate\Support\Str::limit($message->pesan, 80) }}</span></td>
+                                    <td data-label="Cuplikan Pesan">
+                                        <span class="inbox-excerpt">{{ \Illuminate\Support\Str::limit($message->pesan, 80) }}</span>
+                                        @if ($message->foto_bukti_path)<small class="inbox-photo-indicator">Bukti foto tersedia</small>@endif
+                                    </td>
                                     <td data-label="Tanggal"><time datetime="{{ $message->created_at?->toIso8601String() }}">{{ $message->created_at?->locale('id')->translatedFormat('j M Y, H.i') }}</time></td>
                                     <td data-label="Status"><span class="inbox-badge inbox-badge--{{ $message->status }}">{{ $statusNames[$message->status] ?? $message->status }}</span></td>
                                     <td data-label="Aksi" class="inbox-actions-cell">
@@ -206,6 +209,14 @@
                 <h3>Isi Pesan</h3>
                 <p>{!! nl2br(e($selectedMessage->pesan)) !!}</p>
             </section>
+            @if ($selectedMessage->foto_bukti_path)
+                <section class="inbox-message-photo" aria-label="Bukti foto">
+                    <h3>Bukti Foto</h3>
+                    <a href="{{ route('admin.kontak.photo', $selectedMessage) }}" target="_blank" rel="noopener noreferrer">
+                        <img src="{{ route('admin.kontak.photo', $selectedMessage) }}" alt="Bukti foto dari {{ $selectedMessage->nama }}">
+                    </a>
+                </section>
+            @endif
             <form class="inbox-note-form" method="POST" action="{{ route('admin.kontak.note', array_merge(['kontakMasuk' => $selectedMessage->id], $routeQuery)) }}">
                 @csrf
                 @method('PUT')

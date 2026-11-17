@@ -314,6 +314,12 @@
     outline: 3px solid rgb(15 76 129 / 14%);
 }
 
+.contact-field input[type="file"] {
+    padding: 9px 11px;
+    background: #fff;
+    font-size: 13px;
+}
+
 .contact-field [aria-invalid="true"] {
     border-color: #b42318;
 }

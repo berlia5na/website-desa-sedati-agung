@@ -57,7 +57,7 @@
                     <p>Isi formulir berikut dengan informasi yang benar. Kami akan membantu mengarahkan pertanyaan Anda.</p>
                 </div>
                 <div class="contact-layout">
-                    <form class="contact-form" data-contact-form method="POST" action="{{ route('kontak.store') }}" novalidate>
+                    <form class="contact-form" data-contact-form method="POST" action="{{ route('kontak.store') }}" enctype="multipart/form-data" novalidate>
                         @csrf
                         <div class="contact-honeypot" aria-hidden="true">
                             <label for="contact-website">Jangan isi kolom ini</label>
@@ -102,6 +102,11 @@
                                 <label for="contact-message">Pesan <span class="contact-required">*</span></label>
                                 <textarea id="contact-message" name="pesan" minlength="10" maxlength="5000" placeholder="Ceritakan kebutuhan atau pertanyaan Anda (minimal 10 karakter)." required @if ($errors->has('pesan')) aria-invalid="true" @endif aria-describedby="contact-message-error">{{ old('pesan') }}</textarea>
                                 <p class="contact-field__error" id="contact-message-error">@error('pesan'){{ $message }}@enderror</p>
+                            </div>
+                            <div class="contact-field contact-field--full">
+                                <label for="contact-photo">Bukti Foto <span>(opsional, JPG/PNG/WebP maks. 5 MB)</span></label>
+                                <input id="contact-photo" name="foto_bukti" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" @if ($errors->has('foto_bukti')) aria-invalid="true" @endif aria-describedby="contact-photo-error">
+                                <p class="contact-field__error" id="contact-photo-error">@error('foto_bukti'){{ $message }}@enderror</p>
                             </div>
                             <div class="contact-field contact-field--full">
                                 <div class="contact-form__actions">

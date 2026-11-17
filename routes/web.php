@@ -54,6 +54,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::controller(KontakMasukController::class)->prefix('/kontak')->name('kontak.')->group(function () {
             Route::post('/aksi-massal', 'bulkUpdate')->name('bulk');
             Route::delete('/aksi-massal', 'bulkDelete')->name('bulk-delete');
+            Route::get('/{kontakMasuk}/foto', 'photo')->whereNumber('kontakMasuk')->name('photo');
             Route::post('/{kontakMasuk}/buka', 'open')->whereNumber('kontakMasuk')->name('open');
             Route::post('/{kontakMasuk}/status', 'updateStatus')->whereNumber('kontakMasuk')->name('status');
             Route::put('/{kontakMasuk}/catatan', 'updateNote')->whereNumber('kontakMasuk')->name('note');

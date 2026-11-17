@@ -1,0 +1,559 @@
+html[data-theme='dark'] {
+    color-scheme: dark;
+    --blue: #8db9e4;
+    --blue-dark: #a9c8e5;
+    --blue-brand: #8db9e4;
+    --ink: #e3edf6;
+    --muted: #a6b5c3;
+    --line: #344757;
+    --navy: #a9c8e5;
+    --navy-dark: #d2e1ee;
+    --blue-soft: #263c4d;
+    --blue-icon: #273d50;
+    --orange-soft: #47382f;
+    --text: #dce6f0;
+    --bg: #1b2935;
+    --white: #121e28;
+    --contact-blue: #83b4e2;
+    --contact-blue-dark: #a9c8e5;
+    --contact-blue-soft: #263d50;
+    --contact-ink: #e3edf6;
+    --contact-muted: #a6b5c3;
+    --contact-line: #344757;
+    --bumdes-blue: #8db9e4;
+    --bumdes-blue-dark: #a9c8e5;
+    --bumdes-ink: #e3edf6;
+    --bumdes-muted: #a6b5c3;
+    --bumdes-line: rgb(141 185 228 / 20%);
+    --agenda-blue: #8db9e4;
+    --agenda-active: #5b91d1;
+    --agenda-ink: #e3edf6;
+    --agenda-muted: #a6b5c3;
+    --agenda-brown: #d3b39c;
+}
+
+html[data-theme='dark'] body {
+    background: #121e28;
+    color: #e3edf6;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+html[data-theme='dark'] .site-header {
+    background: #182631;
+    border-color: #344757;
+}
+
+html[data-theme='dark'] .site-brand__text strong,
+html[data-theme='dark'] .site-nav a:hover,
+html[data-theme='dark'] .site-nav a.is-active {
+    color: #a9c8e5;
+}
+
+html[data-theme='dark'] .site-brand__text small,
+html[data-theme='dark'] .site-nav a {
+    color: #d0dbe5;
+}
+
+.site-theme-toggle {
+    display: inline-grid;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid #dfe6ec;
+    border-radius: 10px;
+    background: #fff;
+    color: #173c60;
+    cursor: pointer;
+    transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+}
+
+.site-theme-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+.site-theme-toggle:focus-visible {
+    outline: 3px solid #f59e0b;
+    outline-offset: 3px;
+}
+
+html[data-theme='dark'] .site-theme-toggle {
+    border-color: #435767;
+    background: #243543;
+    color: #f5c46a;
+}
+
+html[data-theme='dark'] .site-nav-toggle {
+    border-color: #435767;
+    background: #243543;
+}
+
+html[data-theme='dark'] .site-nav-toggle span {
+    background: #c9d9e7;
+}
+
+html[data-theme='dark'] .site-nav {
+    border-color: #344757;
+}
+
+html[data-theme='dark'] .site-main {
+    background: #121e28;
+}
+
+html[data-theme='dark'] .home-statistics,
+html[data-theme='dark'] .welcome-section__caption,
+html[data-theme='dark'] .transparency-card,
+html[data-theme='dark'] .home-news-card,
+html[data-theme='dark'] .home-agenda-card,
+html[data-theme='dark'] .home-link-card,
+html[data-theme='dark'] .card {
+    border-color: #344757;
+    background-color: #1b2935;
+    color: #e3edf6;
+}
+
+html[data-theme='dark'] .home-statistics__item + .home-statistics__item,
+html[data-theme='dark'] .transparency-card__row {
+    border-color: #344757;
+}
+
+html[data-theme='dark'] .home-statistics__item strong,
+html[data-theme='dark'] .welcome-section__caption strong,
+html[data-theme='dark'] .transparency-card__heading strong,
+html[data-theme='dark'] .transparency-card__row strong,
+html[data-theme='dark'] .home-news-card h3,
+html[data-theme='dark'] .home-agenda-card__details > strong,
+html[data-theme='dark'] .home-link-card strong {
+    color: #d9e8f5;
+}
+
+html[data-theme='dark'] .welcome-section__body > p {
+    color: #bdc9d4;
+}
+
+html[data-theme='dark'] .home-agenda,
+html[data-theme='dark'] .home-links {
+    background: #172530;
+}
+
+html[data-theme='dark'] .transparency-card__row--head,
+html[data-theme='dark'] .home-agenda-card__date,
+html[data-theme='dark'] .home-link-card__icon {
+    background: #263b4b;
+    color: #b7d4ee;
+}
+
+html[data-theme='dark'] .home-statistics__unit,
+html[data-theme='dark'] .home-link-card__number,
+html[data-theme='dark'] .transparency-card__row {
+    color: #bdc9d4;
+}
+
+html[data-theme='dark'] .transparency-card__row--head {
+    color: #c4d5e4;
+}
+
+html[data-theme='dark'] .status-pill,
+html[data-theme='dark'] .transparency-card__note {
+    background: #263b4b;
+    color: #c4dcf0;
+}
+
+html[data-theme='dark'] .news-section__header h2 {
+    color: #d9e8f5;
+}
+
+html[data-theme='dark'] .news-page__intro p,
+html[data-theme='dark'] .news-section__header p,
+html[data-theme='dark'] .news-meta,
+html[data-theme='dark'] .news-result-count,
+html[data-theme='dark'] .news-sort,
+html[data-theme='dark'] .news-author small,
+html[data-theme='dark'] .news-card__footer span,
+html[data-theme='dark'] .news-card__footer a,
+html[data-theme='dark'] .news-empty-state,
+html[data-theme='dark'] .gallery-section__header p,
+html[data-theme='dark'] .gallery-empty,
+html[data-theme='dark'] .gallery-page__empty p,
+html[data-theme='dark'] .news-detail__excerpt,
+html[data-theme='dark'] .news-detail__footer,
+html[data-theme='dark'] .news-related-card > span,
+html[data-theme='dark'] .news-related-card small {
+    color: #bdc9d4;
+}
+
+html[data-theme='dark'] .news-page__intro h1,
+html[data-theme='dark'] .news-featured__body h2,
+html[data-theme='dark'] .news-card__body h3,
+html[data-theme='dark'] .news-detail__header h1,
+html[data-theme='dark'] .news-related__heading h2,
+html[data-theme='dark'] .news-related-card h3,
+html[data-theme='dark'] .gallery-section__header h2,
+html[data-theme='dark'] .gallery-page__header h1,
+html[data-theme='dark'] .gallery-page__section > h2,
+html[data-theme='dark'] .gallery-page__empty h2 {
+    color: #d9e8f5;
+}
+
+html[data-theme='dark'] .news-featured,
+html[data-theme='dark'] .news-card,
+html[data-theme='dark'] .news-related-card,
+html[data-theme='dark'] .news-detail__content,
+html[data-theme='dark'] .gallery-page-card,
+html[data-theme='dark'] .news-empty-state,
+html[data-theme='dark'] .gallery-page__empty,
+html[data-theme='dark'] .news-search__field,
+html[data-theme='dark'] .news-sort select,
+html[data-theme='dark'] .news-filter-pill {
+    border-color: #344757;
+    background-color: #1b2935;
+    color: #dce6f0;
+}
+
+html[data-theme='dark'] .news-search input,
+html[data-theme='dark'] .news-sort select {
+    color: #e3edf6;
+}
+
+html[data-theme='dark'] .news-search input::placeholder {
+    color: #a6b5c3;
+}
+
+html[data-theme='dark'] .news-filter-pill.is-active {
+    border-color: #83b4e2;
+    background: #263d50;
+    color: #d6e8f7;
+}
+
+html[data-theme='dark'] .news-page__header,
+html[data-theme='dark'] .news-section__header {
+    border-color: #344757;
+}
+
+html[data-theme='dark'] .news-pagination .page-link,
+html[data-theme='dark'] .news-pagination .page-item.disabled .page-link {
+    border-color: #435767;
+    background: #1b2935;
+    color: #dce6f0;
+}
+
+html[data-theme='dark'] .news-pagination .page-item.active .page-link {
+    border-color: #2d6197;
+    background: #2d6197;
+    color: #fff;
+}
+
+html[data-theme='dark'] .news-detail__content,
+html[data-theme='dark'] .news-detail__content p,
+html[data-theme='dark'] .news-featured__body p,
+html[data-theme='dark'] .news-card__body p,
+html[data-theme='dark'] .gallery-page__header p {
+    color: #bdc9d4;
+}
+
+html[data-theme='dark'] .gallery-item__overlay,
+html[data-theme='dark'] .gallery-page-card__caption {
+    background: linear-gradient(0deg, rgb(9 20 29 / 92%), rgb(9 20 29 / 4%));
+}
+
+html[data-theme='dark'] .contact-page {
+    --contact-blue: #83b4e2;
+    --contact-blue-dark: #a9c8e5;
+    --contact-blue-soft: #263d50;
+    --contact-ink: #e3edf6;
+    --contact-muted: #a6b5c3;
+    --contact-line: #344757;
+}
+
+html[data-theme='dark'] .contact-hero {
+    background: linear-gradient(110deg, #1a2b38, #121e28 75%);
+}
+
+html[data-theme='dark'] .contact-hero h1,
+html[data-theme='dark'] .contact-page h2,
+html[data-theme='dark'] .contact-card h3,
+html[data-theme='dark'] .contact-side-card h3,
+html[data-theme='dark'] .contact-faq-item summary,
+html[data-theme='dark'] .contact-address strong {
+    color: #d9e8f5;
+}
+
+html[data-theme='dark'] .contact-hero__copy,
+html[data-theme='dark'] .contact-section-heading p,
+html[data-theme='dark'] .contact-form__intro,
+html[data-theme='dark'] .contact-response p,
+html[data-theme='dark'] .contact-faq-item p {
+    color: #bdc9d4;
+}
+
+html[data-theme='dark'] .contact-form-section,
+html[data-theme='dark'] .contact-faq-item,
+html[data-theme='dark'] .contact-address-row {
+    background: #172530;
+}
+
+html[data-theme='dark'] .contact-card,
+html[data-theme='dark'] .contact-side-card,
+html[data-theme='dark'] .contact-form,
+html[data-theme='dark'] .contact-faq-item {
+    border-color: #344757;
+    color: #e3edf6;
+}
+
+html[data-theme='dark'] .contact-field input,
+html[data-theme='dark'] .contact-field textarea,
+html[data-theme='dark'] .contact-field select {
+    border-color: #435767;
+    background: #121e28;
+    color: #e3edf6;
+}
+
+html[data-theme='dark'] .contact-field input::placeholder,
+html[data-theme='dark'] .contact-field textarea::placeholder {
+    color: #9cabb9;
+}
+
+html[data-theme='dark'] .contact-field label,
+html[data-theme='dark'] .contact-hours div {
+    color: #dce6f0;
+}
+
+html[data-theme='dark'] .contact-required,
+html[data-theme='dark'] .contact-field__error {
+    color: #ff9a91;
+}
+
+html[data-theme='dark'] .contact-button {
+    background: #1e6093;
+    color: #fff;
+}
+
+html[data-theme='dark'] .contact-button:hover {
+    background: #174d76;
+}
+
+html[data-theme='dark'] .contact-response {
+    border-color: transparent;
+    background: #1e6093;
+    color: #fff;
+}
+
+html[data-theme='dark'] .contact-response p {
+    color: rgb(255 255 255 / 90%);
+}
+
+html[data-theme='dark'] .contact-map {
+    background: #1b2935;
+}
+
+html[data-theme='dark'] .contact-faq-item summary::after {
+    background: #263d50;
+}
+
+html[data-theme='dark'] .bumdes-page {
+    --bumdes-blue: #8db9e4;
+    --bumdes-blue-dark: #a9c8e5;
+    --bumdes-brown: #efc39e;
+    --bumdes-ink: #e3edf6;
+    --bumdes-muted: #a6b5c3;
+    --bumdes-line: rgb(141 185 228 / 20%);
+    background: radial-gradient(ellipse at 88% 8%, rgb(196 130 90 / 8%), transparent 25%), #121e28;
+}
+
+html[data-theme='dark'] .bumdes-hero {
+    border-color: #344757;
+    background: radial-gradient(ellipse at 85% 22%, rgb(74 106 137 / 20%), transparent 32%), linear-gradient(125deg, #1b2935 14%, #202b34 100%);
+}
+
+html[data-theme='dark'] .bumdes-info-card,
+html[data-theme='dark'] .bumdes-mission-card,
+html[data-theme='dark'] .bumdes-role-card,
+html[data-theme='dark'] .bumdes-unit-card {
+    border-color: #344757;
+    background: #1b2935;
+    color: #e3edf6;
+}
+
+html[data-theme='dark'] .bumdes-hero__description,
+html[data-theme='dark'] .bumdes-info-card p,
+html[data-theme='dark'] .bumdes-vision__statement p,
+html[data-theme='dark'] .bumdes-mission-card p,
+html[data-theme='dark'] .bumdes-role-card p,
+html[data-theme='dark'] .bumdes-unit-card p,
+html[data-theme='dark'] .bumdes-section__heading > p {
+    color: #bdc9d4;
+}
+
+html[data-theme='dark'] .bumdes-eyebrow,
+html[data-theme='dark'] .bumdes-mission-card__number,
+html[data-theme='dark'] .bumdes-role-card__position,
+html[data-theme='dark'] .bumdes-unit-card__contact {
+    background: #3a302a;
+    color: #efc39e;
+}
+
+html[data-theme='dark'] .bumdes-info-card__icon,
+html[data-theme='dark'] .bumdes-role-card__avatar,
+html[data-theme='dark'] .bumdes-unit-card__image,
+html[data-theme='dark'] .bumdes-management__empty,
+html[data-theme='dark'] .bumdes-units__empty {
+    background: #263743;
+}
+
+html[data-theme='dark'] .public-agenda {
+    --agenda-blue: #8db9e4;
+    --agenda-active: #5b91d1;
+    --agenda-ink: #e3edf6;
+    --agenda-muted: #a6b5c3;
+    --agenda-brown: #d3b39c;
+    --agenda-line: rgb(141 185 228 / 22%);
+    color: #e3edf6;
+}
+
+html[data-theme='dark'] .public-agenda__card,
+html[data-theme='dark'] .public-agenda__spotlight,
+html[data-theme='dark'] .public-agenda__detail-card,
+html[data-theme='dark'] .public-agenda__related-card,
+html[data-theme='dark'] .public-agenda__empty,
+html[data-theme='dark'] .public-agenda__search {
+    border-color: #344757;
+    background-color: #1b2935;
+    color: #e3edf6;
+}
+
+html[data-theme='dark'] .public-agenda__hero {
+    background: linear-gradient(125deg, #1b2935, #243745);
+}
+
+html[data-theme='dark'] .public-agenda__hero h1,
+html[data-theme='dark'] .public-agenda__spotlight-content > h3,
+html[data-theme='dark'] .public-agenda__empty h3,
+html[data-theme='dark'] .public-agenda__empty--spotlight h3,
+html[data-theme='dark'] .public-agenda__card h3,
+html[data-theme='dark'] .public-agenda__detail-card h1 {
+    color: #d9e8f5;
+}
+
+html[data-theme='dark'] .public-agenda__card h2,
+html[data-theme='dark'] .public-agenda__related-card strong,
+html[data-theme='dark'] .public-agenda__section-heading h2 {
+    color: #d9e8f5;
+}
+
+html[data-theme='dark'] .public-agenda__card .public-agenda__description,
+html[data-theme='dark'] .public-agenda__spotlight-description,
+html[data-theme='dark'] .public-agenda__hero > p,
+html[data-theme='dark'] .public-agenda__hero-note,
+html[data-theme='dark'] .public-agenda__heading p,
+html[data-theme='dark'] .public-agenda__section-heading p,
+html[data-theme='dark'] .public-agenda__spotlight-details dt,
+html[data-theme='dark'] .public-agenda__spotlight-details dd,
+html[data-theme='dark'] .public-agenda__empty--spotlight p,
+html[data-theme='dark'] .public-agenda__card-details dd,
+html[data-theme='dark'] .public-agenda__empty p,
+html[data-theme='dark'] .public-agenda__detail-date,
+html[data-theme='dark'] .public-agenda__detail-description,
+html[data-theme='dark'] .public-agenda__detail-info dd,
+html[data-theme='dark'] .public-agenda__related-card small {
+    color: #bdc9d4;
+}
+
+html[data-theme='dark'] .public-agenda__date-tile,
+html[data-theme='dark'] .public-agenda__spotlight-date,
+html[data-theme='dark'] .public-agenda__card-details > div,
+html[data-theme='dark'] .public-agenda__detail-info > div {
+    background: #263743;
+}
+
+html[data-theme='dark'] .public-agenda__date-tile,
+html[data-theme='dark'] .public-agenda__date-tile strong,
+html[data-theme='dark'] .public-agenda__spotlight-date strong,
+html[data-theme='dark'] .public-agenda__spotlight-date small {
+    color: #d9e8f5;
+}
+
+html[data-theme='dark'] .public-agenda__detail-info dt,
+html[data-theme='dark'] .public-agenda__related-card > span,
+html[data-theme='dark'] .public-agenda__detail-date > span {
+    color: #c4d5e4;
+}
+
+html[data-theme='dark'] .public-agenda__search input {
+    color: #e3edf6;
+}
+
+html[data-theme='dark'] .public-agenda__search input::placeholder {
+    color: #a6b5c3;
+}
+
+html[data-theme='dark'] .container .hero {
+    border-color: #344757;
+    background: linear-gradient(125deg, #1b2935 14%, #202b34 100%);
+}
+
+html[data-theme='dark'] .container .badge {
+    background: #344757;
+    color: #dce6f0;
+}
+
+html[data-theme='dark'] .container .card,
+html[data-theme='dark'] .container .member {
+    border-color: #344757;
+    background: #1b2935;
+    color: #e3edf6;
+}
+
+html[data-theme='dark'] .container .quote,
+html[data-theme='dark'] .container .hero__img figcaption {
+    background: rgb(27 41 53 / 94%);
+    color: #e3edf6;
+}
+
+html[data-theme='dark'] .container .kantor__map figcaption {
+    background: rgb(18 30 40 / 94%);
+    color: #e3edf6;
+}
+
+html[data-theme='dark'] .container .kantor__map figcaption a {
+    color: #a9c8e5;
+}
+
+html[data-theme='dark'] .container .hero__text > p,
+html[data-theme='dark'] .container .sejarah__text p {
+    color: #bdc9d4;
+}
+
+html[data-theme='dark'] .container .stat,
+html[data-theme='dark'] .container .info {
+    background: #1b2935;
+}
+
+html[data-theme='dark'] .container .kantor {
+    border-color: #344757;
+}
+
+@media (max-width: 1100px) {
+    html .site-header .site-theme-toggle {
+        order: 2;
+    }
+
+    html .site-header .site-nav-toggle {
+        order: 3;
+    }
+
+    html .site-header > .site-header__admin {
+        order: 4;
+    }
+
+    html .site-header .site-nav {
+        order: 5;
+    }
+}
+
+@media (max-width: 640px) {
+    html .site-header .site-theme-toggle {
+        width: 40px;
+        height: 40px;
+    }
+}

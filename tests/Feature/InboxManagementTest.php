@@ -6,6 +6,8 @@ use App\Models\KontakMasuk;
 use App\Models\User;
 use Database\Seeders\KontakMasukSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class InboxManagementTest extends TestCase
@@ -24,6 +26,7 @@ class InboxManagementTest extends TestCase
             'telepon' => '081234567890',
             'subjek' => 'Informasi layanan desa',
             'status' => 'baru',
+            'foto_bukti_path' => null,
         ]);
 
         $this->actingAs(User::factory()->create())
@@ -31,6 +34,51 @@ class InboxManagementTest extends TestCase
             ->assertOk()
             ->assertSee('Nabila Warga')
             ->assertSee('Belum Dibaca');
+    }
+
+    public function test_public_contact_form_can_store_an_optional_photo_for_admin_viewing(): void
+    {
+        Storage::fake('local');
+        $photo = UploadedFile::fake()->image('bukti.jpg');
+
+        $this->post(route('kontak.store'), [
+            ...$this->contactData(),
+            'foto_bukti' => $photo,
+        ])
+            ->assertRedirect(route('kontak'))
+            ->assertSessionHas('contact_status');
+
+        $message = KontakMasuk::query()->firstOrFail();
+        $this->assertNotNull($message->foto_bukti_path);
+        Storage::disk('local')->assertExists($message->foto_bukti_path);
+
+        $this->get(route('admin.kontak.photo', $message))->assertRedirect(route('admin.login'));
+
+        $this->actingAs(User::factory()->create())
+            ->get(route('admin.kontak', ['pesan' => $message->id]))
+            ->assertOk()
+            ->assertSee(route('admin.kontak.photo', $message), false)
+            ->assertSee('Bukti foto tersedia');
+
+        $this->get(route('admin.kontak.photo', $message))
+            ->assertOk()
+            ->assertHeader('content-disposition', 'inline; filename='.basename($message->foto_bukti_path));
+    }
+
+    public function test_public_contact_form_rejects_non_image_photo_attachments(): void
+    {
+        Storage::fake('local');
+
+        $this->from(route('kontak'))
+            ->post(route('kontak.store'), [
+                ...$this->contactData(),
+                'foto_bukti' => UploadedFile::fake()->create('dokumen.pdf', 100, 'application/pdf'),
+            ])
+            ->assertRedirect(route('kontak'))
+            ->assertSessionHasErrors('foto_bukti');
+
+        $this->assertDatabaseCount('kontak_masuk', 0);
+        Storage::disk('local')->assertDirectoryEmpty('kontak-bukti');
     }
 
     public function test_honeypot_submission_is_acknowledged_without_storing_a_message(): void

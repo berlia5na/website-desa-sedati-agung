@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @import './kontak.css';
 @import './profil-bumdes.css';
+@import './public-theme.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';

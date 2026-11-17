@@ -1,5 +1,39 @@
 import './bootstrap';
 
+const themeToggle = document.querySelector('[data-theme-toggle]');
+
+if (themeToggle instanceof HTMLButtonElement) {
+    const themeIcons = themeToggle.querySelectorAll('[data-theme-icon]');
+
+    const updateThemeToggle = (theme) => {
+        const nextTheme = theme === 'dark' ? 'light' : 'dark';
+        const label = `Aktifkan mode ${nextTheme === 'dark' ? 'gelap' : 'terang'}`;
+
+        themeToggle.setAttribute('aria-label', label);
+        themeToggle.setAttribute('title', label);
+        themeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
+
+        themeIcons.forEach((icon) => {
+            icon.hidden = icon.getAttribute('data-theme-icon') !== nextTheme;
+        });
+    };
+
+    const currentTheme = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+    updateThemeToggle(currentTheme);
+
+    themeToggle.addEventListener('click', () => {
+        const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = nextTheme;
+        updateThemeToggle(nextTheme);
+
+        try {
+            localStorage.setItem('site-theme', nextTheme);
+        } catch (error) {
+            console.error('Preferensi tema tidak dapat disimpan di browser.', error);
+        }
+    });
+}
+
 const navigationToggle = document.querySelector('[data-site-nav-toggle]');
 const siteHeader = navigationToggle?.closest('.site-header');
 

@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\KontakMasuk;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class KontakMasukController extends Controller
 {
@@ -78,6 +80,14 @@ class KontakMasukController extends Controller
             ->with('status', 'Pesan dibuka dan ditandai sudah dibaca.');
     }
 
+    public function photo(KontakMasuk $kontakMasuk): StreamedResponse
+    {
+        $path = $kontakMasuk->foto_bukti_path;
+        abort_unless($path && Storage::disk('local')->exists($path), 404);
+
+        return Storage::disk('local')->response($path, basename($path), [], 'inline');
+    }
+
     public function updateStatus(Request $request, KontakMasuk $kontakMasuk): RedirectResponse
     {
         $validated = $request->validate([
@@ -132,7 +142,7 @@ class KontakMasukController extends Controller
             'ids.*' => ['required', 'integer', 'distinct', 'exists:kontak_masuk,id'],
         ]);
 
-        KontakMasuk::query()->whereIn('id', $validated['ids'])->delete();
+        KontakMasuk::query()->whereIn('id', $validated['ids'])->get()->each->delete();
 
         return $this->redirectToInbox($request)
             ->with('status', 'Pesan terpilih berhasil dihapus permanen.');

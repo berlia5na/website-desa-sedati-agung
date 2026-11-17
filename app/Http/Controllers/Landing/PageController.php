@@ -242,8 +242,15 @@ class PageController extends Controller
             'telepon' => ['nullable', 'string', 'max:30', 'regex:/^[0-9+\s().-]+$/'],
             'subjek' => ['required', 'in:Informasi layanan desa,Administrasi kependudukan,Pengaduan atau aspirasi,Kerja sama dan lainnya'],
             'pesan' => ['required', 'string', 'min:10', 'max:5000'],
+            'foto_bukti' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:5120'],
             'website' => ['nullable', 'string', 'max:255'],
         ]);
+
+        $fotoBukti = $request->file('foto_bukti');
+        $fotoBuktiPath = $fotoBukti?->store('kontak-bukti', 'local');
+        if ($fotoBukti && ! $fotoBuktiPath) {
+            throw new \RuntimeException('Bukti foto gagal disimpan.');
+        }
 
         KontakMasuk::query()->create([
             'nama' => $validated['nama'],
@@ -251,6 +258,7 @@ class PageController extends Controller
             'telepon' => $validated['telepon'] ?? null,
             'subjek' => $validated['subjek'],
             'pesan' => $validated['pesan'],
+            'foto_bukti_path' => $fotoBuktiPath,
             'status' => 'baru',
         ]);
 

@@ -14,6 +14,7 @@ class KontakMasuk extends Model
         'telepon',
         'subjek',
         'pesan',
+        'foto_bukti_path',
         'status',
         'catatan_admin',
     ];
